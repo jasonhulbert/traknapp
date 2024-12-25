@@ -1,0 +1,40 @@
+{
+    "name": "trakn-app",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev --turbopack",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint"
+    },
+    "dependencies": {
+        "@tanstack/react-virtual": "^3.11.2",
+        "next": "15.1.0",
+        "react": "^19.0.0",
+        "react-dom": "^19.0.0"
+    },
+    "devDependencies": {
+        "@eslint/eslintrc": "^3",
+        "@types/color": "^4.2.0",
+        "@types/node": "^20",
+        "@types/react": "^19",
+        "@types/react-dom": "^19",
+        "color": "^4.2.3",
+        "eslint": "^9",
+        "eslint-config-next": "15.1.0",
+        "eslint-config-prettier": "^9.1.0",
+        "eslint-plugin-prettier": "^5.2.1",
+        "framer-motion": "^11.14.4",
+        "hugeicons-react": "^0.3.0",
+        "nextui-cli": "^0.5.0",
+        "postcss": "^8",
+        "prettier": "^3.4.2",
+        "react-dnd": "^16.0.1",
+        "react-dnd-html5-backend": "^16.0.1",
+        "react-dnd-touch-backend": "^16.0.1",
+        "tailwindcss": "^3.4.1",
+        "typescript": "^5",
+        "uuid": "^11.0.3"
+    }
+}
