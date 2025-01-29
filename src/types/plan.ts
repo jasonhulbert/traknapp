@@ -1,3 +1,6 @@
+import { PropConst } from '@/types/prop-const';
+import { PlanBlockSetTypes } from '@/models/plan';
+
 export type Plan = {
     id: string;
     name: string;
@@ -7,14 +10,12 @@ export type Plan = {
 export type PlanBlock = {
     id: string;
     description: string;
-    type: 'exercise' | 'rest' | 'recovery';
+    setType: PropConst<typeof PlanBlockSetTypes>;
+    sets: Array<Partial<PlanBlockSet>>;
 };
 
-export type PlanExerciseBlock = PlanBlock & {
-    setType: 'rep' | 'time';
-    sets: Array<{
-        count: number;
-        time: number;
-        rest: number;
-    }>;
+export type PlanBlockSet = {
+    count: number;
+    time: number;
+    rest: number;
 };

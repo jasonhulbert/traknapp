@@ -1,0 +1,56 @@
+{
+    "id": "1",
+    "name": "Full Body Strength",
+    "blocks": [
+        {
+            "id": "1",
+            "description": "Push Up",
+            "setType": "rep",
+            "sets": [
+                { "count": 10, "time": 0, "rest": 60 },
+                { "count": 10, "time": 0, "rest": 60 },
+                { "count": 10, "time": 0, "rest": 60 }
+            ]
+        },
+        {
+            "id": "2",
+            "description": "Pull Up",
+            "setType": "rep",
+            "sets": [
+                { "count": 10, "time": 0, "rest": 60 },
+                { "count": 10, "time": 0, "rest": 60 },
+                { "count": 10, "time": 0, "rest": 60 }
+            ]
+        },
+        {
+            "id": "3",
+            "description": "Squat",
+            "setType": "rep",
+            "sets": [
+                { "count": 10, "time": 0, "rest": 60 },
+                { "count": 10, "time": 0, "rest": 60 },
+                { "count": 10, "time": 0, "rest": 60 }
+            ]
+        },
+        {
+            "id": "4",
+            "description": "Step-Through Lunges",
+            "setType": "rep",
+            "sets": [
+                { "count": 10, "time": 0, "rest": 60 },
+                { "count": 10, "time": 0, "rest": 60 },
+                { "count": 10, "time": 0, "rest": 60 }
+            ]
+        },
+        {
+            "id": "5",
+            "description": "Hanging Leg Raises",
+            "setType": "rep",
+            "sets": [
+                { "count": 10, "time": 0, "rest": 60 },
+                { "count": 10, "time": 0, "rest": 60 },
+                { "count": 10, "time": 0, "rest": 60 }
+            ]
+        }
+    ]
+}

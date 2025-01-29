@@ -1,7 +1,7 @@
 import { FC, JSX } from 'react';
-import { PlanExerciseBlock } from '@/types/plan';
+import { PlanBlock } from '@/types/plan';
 
-export const PlanBlocksItemExercise: FC<{ block: PlanExerciseBlock }> = ({ block }): JSX.Element => {
+export const PlanBlocksItemExercise: FC<{ block: PlanBlock }> = ({ block }): JSX.Element => {
     return (
         <table className="table-fixed">
             <thead>

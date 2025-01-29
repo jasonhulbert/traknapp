@@ -1,9 +1,11 @@
 import { Config } from 'tailwindcss';
 import Color from 'color';
 
-const defaultOptions = {
+const colorConfig = {
+    background: '#000000',
+    foreground: '#ffffff',
     colors: {
-        neutral: '#C0C0C0',
+        neutral: '#b2b2b2',
         primary: '#F9773E',
         success: '#359D66',
         warning: '#F1B746',
@@ -11,18 +13,43 @@ const defaultOptions = {
     },
     weights: {
         50: ['#000', 0.95],
-        100: ['#000', 0.9],
-        200: ['#000', 0.75],
-        300: ['#000', 0.5],
-        400: ['#000', 0.25],
+        100: ['#000', 0.85],
+        200: ['#000', 0.7],
+        300: ['#000', 0.65],
+        400: ['#000', 0.35],
         500: ['#000', 0],
-        600: ['#fff', 0.25],
-        700: ['#fff', 0.5],
-        800: ['#fff', 0.75],
-        900: ['#fff', 0.9],
+        600: ['#fff', 0.35],
+        700: ['#fff', 0.65],
+        800: ['#fff', 0.7],
+        900: ['#fff', 0.85],
         950: ['#fff', 0.95]
     } as { [weight: number]: [string, number] }
 };
+
+// const colorConfig = {
+//     background: '#ffffff',
+//     foreground: '#000000',
+//     colors: {
+//         neutral: '#808080',
+//         primary: '#F9773E',
+//         success: '#359D66',
+//         warning: '#F1B746',
+//         danger: '#EE5B58'
+//     },
+//     weights: {
+//         50: ['#fff', 0.95],
+//         100: ['#fff', 0.85],
+//         200: ['#fff', 0.7],
+//         300: ['#fff', 0.65],
+//         400: ['#fff', 0.35],
+//         500: ['#fff', 0],
+//         600: ['#000', 0.35],
+//         700: ['#000', 0.6],
+//         800: ['#000', 0.7],
+//         900: ['#000', 0.85],
+//         950: ['#000', 0.95]
+//     } as { [weight: number]: [string, number] }
+// };
 
 const generateThemeColors = (colors: Record<string, string>, weights: { [weight: number]: [string, number] }) => {
     const palette: Record<string, Record<string, string>> = {};
@@ -46,11 +73,22 @@ export default {
         './src/app/**/*.{js,ts,jsx,tsx,mdx}'
     ],
     theme: {
+        borderRadius: {
+            none: '0',
+            sm: '0.25rem',
+            DEFAULT: '0.375rem',
+            md: '0.5rem',
+            lg: '0.75rem',
+            xl: '0.1rem',
+            '2xl': '1.5rem',
+            '3xl': '2rem',
+            full: '9999px'
+        },
         extend: {
             colors: {
-                background: '#000000',
-                foreground: '#ffffff',
-                ...generateThemeColors(defaultOptions.colors, defaultOptions.weights)
+                background: colorConfig.background,
+                foreground: colorConfig.foreground,
+                ...generateThemeColors(colorConfig.colors, colorConfig.weights)
             }
         }
     }
