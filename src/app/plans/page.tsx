@@ -1,12 +1,24 @@
-import { PlanList } from '@/components/plan-list/plan-list';
-import { Plan } from '@/types/plan';
 import { FC } from 'react';
+import { PlanList } from '@/components/plan-list/plan-list';
 
 const Page: FC = async () => {
-    const response = await fetch('http://localhost:3000/mock-plans.json');
-    const plans: Plan[] = await response.json();
+    const plans = await fetchPlans();
 
-    return <PlanList plans={plans} />;
+    return <>{plans ? <PlanList plans={plans} /> : <div>Failed to load plans</div>}</>;
+};
+
+const fetchPlans = async () => {
+    try {
+        const response = await fetch('http://localhost:3000/api/plans');
+
+        if (!response.ok) {
+            throw new Error('Failed to fetch plans');
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error('Error fetching plans:', error);
+    }
 };
 
 export default Page;

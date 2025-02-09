@@ -1,5 +1,5 @@
 import { FC, JSX, ReactNode, useMemo } from 'react';
-import { PropConst } from '../../../types/prop-const';
+import { PropConst } from '../prop-const';
 import { resolveFinalClassNames } from '../util/class-names';
 
 export type TrkCardProps = {

@@ -3,8 +3,8 @@ import { PropsWithChildren } from 'react';
 import { fontSans } from '@/lib/fonts/fonts';
 import { Providers } from './providers';
 import './globals.css';
-import TrkNavbar from '@/components/common/navbar/navbar';
-import TrkView from '@/components/common/view/view';
+import TrkNavbar from '@/lib/ui/navbar/navbar';
+import TrkView from '@/lib/ui/view/view';
 
 export const metadata: Metadata = {
     title: 'Trakn App',

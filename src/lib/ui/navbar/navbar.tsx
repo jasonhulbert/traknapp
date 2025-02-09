@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { ArrowLeft01Icon } from 'hugeicons-react';
-import { TrkButton } from '@/components/common/button/button';
+import { TrkButton } from '../button/button';
 
 export default function TrkNavbar() {
     const { back } = useRouter();

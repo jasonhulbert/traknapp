@@ -1,6 +1,6 @@
 import { FC, JSX, ReactNode, useMemo } from 'react';
 import { resolveFinalClassNames } from '../util/class-names';
-import { PropConst } from '../../../types/prop-const';
+import { PropConst } from '../prop-const';
 
 export type TrkFieldProps = {
     children: ReactNode;

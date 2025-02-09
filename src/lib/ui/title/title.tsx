@@ -1,6 +1,6 @@
 import { FC, JSX, ReactNode, useMemo } from 'react';
 import { resolveFinalClassNames } from '../util/class-names';
-import { PropConst } from '@/types/prop-const';
+import { PropConst } from '@/lib/ui/prop-const';
 
 export type TrkTitleProps = {
     children: ReactNode;

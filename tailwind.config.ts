@@ -26,31 +26,6 @@ const colorConfig = {
     } as { [weight: number]: [string, number] }
 };
 
-// const colorConfig = {
-//     background: '#ffffff',
-//     foreground: '#000000',
-//     colors: {
-//         neutral: '#808080',
-//         primary: '#F9773E',
-//         success: '#359D66',
-//         warning: '#F1B746',
-//         danger: '#EE5B58'
-//     },
-//     weights: {
-//         50: ['#fff', 0.95],
-//         100: ['#fff', 0.85],
-//         200: ['#fff', 0.7],
-//         300: ['#fff', 0.65],
-//         400: ['#fff', 0.35],
-//         500: ['#fff', 0],
-//         600: ['#000', 0.35],
-//         700: ['#000', 0.6],
-//         800: ['#000', 0.7],
-//         900: ['#000', 0.85],
-//         950: ['#000', 0.95]
-//     } as { [weight: number]: [string, number] }
-// };
-
 const generateThemeColors = (colors: Record<string, string>, weights: { [weight: number]: [string, number] }) => {
     const palette: Record<string, Record<string, string>> = {};
 
@@ -68,9 +43,9 @@ const generateThemeColors = (colors: Record<string, string>, weights: { [weight:
 
 export default {
     content: [
-        './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
+        './src/app/**/*.{js,ts,jsx,tsx,mdx}',
         './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-        './src/app/**/*.{js,ts,jsx,tsx,mdx}'
+        './src/lib/**/*.{js,ts,jsx,tsx,mdx}'
     ],
     theme: {
         borderRadius: {

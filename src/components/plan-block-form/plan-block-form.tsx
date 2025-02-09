@@ -1,13 +1,13 @@
-import { PlanBlock, PlanBlockSet } from '@/types/plan';
-import { PlanBlockSetTypes } from '@/models/plan';
 import { FC, Fragment, JSX, useCallback, useEffect, useRef, useState } from 'react';
 import { v4 as uuid } from 'uuid';
-import { TrkInput } from '../common/input/input';
-import { TrkSelect } from '../common/select/select';
-import { TrkButton } from '../common/button/button';
+import { PlanBlock, PlanBlockSet } from '@/types/plan';
+import { PlanBlockSetType } from '@/models/plan';
 import { Add01Icon, Remove01Icon } from 'hugeicons-react';
-import { TrkTitle } from '../common/title/title';
-import { PropConst } from '@/types/prop-const';
+import { TrkInput } from '@/lib/ui/input/input';
+import { TrkSelect } from '@/lib/ui/select/select';
+import { TrkButton } from '@/lib/ui/button/button';
+import { TrkTitle } from '@/lib/ui/title/title';
+import { PropConst } from '@/lib/ui/prop-const';
 
 export type PlanBlockFormProps = {
     initBlock?: Partial<PlanBlock>;
@@ -22,7 +22,7 @@ export const PlanBlockForm: FC<PlanBlockFormProps> = ({ initBlock, onSubmit }): 
     const defaultBlock = useRef<Partial<PlanBlock>>({
         id: defaultBlockId.current,
         description: '',
-        setType: 'rep',
+        setType: PlanBlockSetType.Rep,
         sets: [
             {
                 count: 10,
@@ -96,17 +96,17 @@ export const PlanBlockForm: FC<PlanBlockFormProps> = ({ initBlock, onSubmit }): 
                     onChange={(e) => {
                         setBlockData((prev) => ({
                             ...prev,
-                            setType: e.target.value as PropConst<typeof PlanBlockSetTypes>
+                            setType: e.target.value as PropConst<typeof PlanBlockSetType>
                         }));
 
                         switch (e.target.value) {
-                            case PlanBlockSetTypes.Time:
+                            case PlanBlockSetType.Time:
                                 setBlockData((prev) => ({
                                     ...prev,
                                     sets: prev?.sets?.map((set) => ({ ...set, count: 0 }))
                                 }));
                                 break;
-                            case PlanBlockSetTypes.Rep:
+                            case PlanBlockSetType.Rep:
                                 setBlockData((prev) => ({
                                     ...prev,
                                     sets: prev?.sets?.map((set) => ({ ...set, time: 0 }))
@@ -116,7 +116,7 @@ export const PlanBlockForm: FC<PlanBlockFormProps> = ({ initBlock, onSubmit }): 
                         }
                     }}
                 >
-                    {Object.entries(PlanBlockSetTypes).map(([key, value]) => (
+                    {Object.entries(PlanBlockSetType).map(([key, value]) => (
                         <option key={key} value={value}>
                             {key}
                         </option>
@@ -149,7 +149,7 @@ export const PlanBlockForm: FC<PlanBlockFormProps> = ({ initBlock, onSubmit }): 
                                     labelPosition="none"
                                     type="number"
                                     value={`${set.count}`}
-                                    disabled={blockData?.setType === PlanBlockSetTypes.Time}
+                                    disabled={blockData?.setType === PlanBlockSetType.Time}
                                     onChange={(e) => updateBlockSet(index, e.target.value, 'count')}
                                 ></TrkInput>
                             </div>
@@ -159,7 +159,7 @@ export const PlanBlockForm: FC<PlanBlockFormProps> = ({ initBlock, onSubmit }): 
                                     labelPosition="none"
                                     type="number"
                                     value={`${set.time}`}
-                                    disabled={blockData?.setType === PlanBlockSetTypes.Rep}
+                                    disabled={blockData?.setType === PlanBlockSetType.Rep}
                                     onChange={(e) => updateBlockSet(index, e.target.value, 'time')}
                                 ></TrkInput>
                             </div>
