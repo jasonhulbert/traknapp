@@ -1,5 +1,4 @@
-import { PropConst } from '@/types/prop-const';
-import { PlanBlockSetTypes } from '@/models/plan';
+import { PlanBlockSetType } from '@/models/plan';
 
 export type Plan = {
     id: string;
@@ -10,7 +9,7 @@ export type Plan = {
 export type PlanBlock = {
     id: string;
     description: string;
-    setType: PropConst<typeof PlanBlockSetTypes>;
+    setType: PlanBlockSetType;
     sets: Array<Partial<PlanBlockSet>>;
 };
 

@@ -2,12 +2,12 @@
 
 import { FC, JSX } from 'react';
 import { AddSquareIcon, Cancel01Icon } from 'hugeicons-react';
-import { PlanBlocks } from '../plan-blocks/plan-blocks';
-import { TrkButton } from '../common/button/button';
-import { TrkTitle } from '../common/title/title';
-import { TrkDialog, useTrkDialog } from '../common/dialog';
-import { PlanBlockForm } from '../plan-block-form/plan-block-form';
+import { TrkButton } from '@/lib/ui/button/button';
+import { TrkTitle } from '@/lib/ui//title/title';
+import { TrkDialog, useTrkDialog } from '@/lib/ui/dialog';
 import { Plan, PlanBlock } from '@/types/plan';
+import { PlanBlocks } from '../plan-blocks/plan-blocks';
+import { PlanBlockForm } from '../plan-block-form/plan-block-form';
 
 export type PlanViewProps = {
     plan: Plan;

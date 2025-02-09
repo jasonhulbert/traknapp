@@ -3,7 +3,7 @@ import { FC, JSX, ReactNode, useEffect, useMemo, useState } from 'react';
 import { useTrkDialog } from './dialog-provider';
 import { resolveFinalClassNames } from '../util/class-names';
 import { TrkTitle } from '../title/title';
-import { PropConst } from '../../../types/prop-const';
+import { PropConst } from '../prop-const';
 
 export type TrkDialogProps = {
     id: string;

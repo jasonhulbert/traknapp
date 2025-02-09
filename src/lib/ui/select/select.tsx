@@ -1,5 +1,5 @@
 import { ChangeEvent, FC, JSX, ReactNode, useMemo } from 'react';
-import { PropConst } from '../../../types/prop-const';
+import { PropConst } from '../prop-const';
 import { joinClassNames } from '../util/class-names';
 import { ArrowDown01Icon } from 'hugeicons-react';
 import { TrkField, TrkFieldLabelPositions } from '../field/field';

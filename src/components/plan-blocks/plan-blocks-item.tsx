@@ -1,9 +1,9 @@
 import { PlanBlock } from '@/types/plan';
 import { FC, JSX } from 'react';
 import { Settings01Icon } from 'hugeicons-react';
-import { TrkButton } from '@/components/common/button/button';
-import { TrkCard } from '@/components/common/card/card';
-import { TrkTitle } from '../common/title/title';
+import { TrkButton } from '@/lib/ui/button/button';
+import { TrkCard } from '@/lib/ui/card/card';
+import { TrkTitle } from '@/lib/ui/title/title';
 import { PlanBlocksItemExercise } from './plan-blocks-item-exercise';
 
 export const PlanBlocksItem: FC<{ block: PlanBlock }> = ({ block }): JSX.Element => {

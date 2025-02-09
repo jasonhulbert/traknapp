@@ -1,6 +1,6 @@
 import { ChangeEvent, FC, JSX, useMemo } from 'react';
 import { v4 as uuid } from 'uuid';
-import { PropConst } from '../../../types/prop-const';
+import { PropConst } from '../prop-const';
 import { joinClassNames } from '../util/class-names';
 import { TrkField, TrkFieldLabelPositions } from '../field/field';
 

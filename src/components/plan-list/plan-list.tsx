@@ -1,11 +1,11 @@
 'use client';
 
 import { FC, JSX, useEffect } from 'react';
+import Link from 'next/link';
 import { Plan } from '@/types/plan';
 import { useAppStore } from '@/store/app-store';
-import Link from 'next/link';
-import { TrkTitle } from '@/components/common/title/title';
-import { TrkCard } from '@/components/common/card/card';
+import { TrkTitle } from '@/lib/ui/title/title';
+import { TrkCard } from '@/lib/ui/card/card';
 
 export type PlanListProps = {
     plans: Plan[];

@@ -1,4 +1,4 @@
-export const PlanBlockSetTypes = {
-    Rep: 'rep',
-    Time: 'time'
-} as const;
+export enum PlanBlockSetType {
+    Rep = 'rep',
+    Time = 'time'
+}
