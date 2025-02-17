@@ -38,8 +38,7 @@ export type TrkDialogModClassNames = {
 };
 
 export const TrkDialogVariants = {
-    Default: 'default',
-    Glass: 'glass'
+    Default: 'default'
 } as const;
 
 export const TrkDialog: FC<TrkDialogProps> = ({
@@ -57,11 +56,11 @@ export const TrkDialog: FC<TrkDialogProps> = ({
     const baseClassNames = useMemo<TrkDialogClassNames>(
         () => ({
             dialog: 'relative z-[999]',
-            backdrop: 'fixed inset-0 bg-background/40',
+            backdrop: 'fixed inset-0 bg-background/60',
             container: 'fixed inset-0 flex w-screen h-screen items-center justify-center',
             panel: "flex flex-col content-baseline relative w-[calc(100%-theme('spacing.8'))] h-auto max-w-[calc(theme('screens.sm')-theme('spacing.8'))] max-h-[calc(100vh-theme('spacing.8'))] mx-auto overflow-hidden border rounded-lg shadow-lg",
             header: 'flex-shrink justify-self-start flex flex-nowrap gap-x-2 items-center justify-between min-h-fit p-4',
-            headerTitle: 'text-xl leading-tight font-semibold',
+            headerTitle: '',
             headerUtils: 'flex flex-nowrap items-center gap-x-2',
             body: 'flex-1 p-4 overflow-y-auto',
             footer: 'flex-shrink justify-self-end min-h-fit p-4'
@@ -72,8 +71,7 @@ export const TrkDialog: FC<TrkDialogProps> = ({
     const modClassNames = useMemo<TrkDialogModClassNames>(
         () => ({
             panel: {
-                'bg-background border-neutral-200': variant === TrkDialogVariants.Default,
-                'bg-neutral-100 bg-opacity-60 backdrop-blur-md border-neutral-200': variant === TrkDialogVariants.Glass
+                'bg-neutral-100/60 backdrop-blur-md border-neutral-100 shadow-md': variant === TrkDialogVariants.Default
             }
         }),
         [variant]
@@ -101,8 +99,10 @@ export const TrkDialog: FC<TrkDialogProps> = ({
                 <DialogPanel className={finalClassNames.panel}>
                     <div className={finalClassNames.header}>
                         {title && (
-                            <DialogTitle className={finalClassNames.headerTitle}>
-                                <TrkTitle size="xl">{title}</TrkTitle>
+                            <DialogTitle>
+                                <TrkTitle size="xl" classNames={{ title: finalClassNames.headerTitle }}>
+                                    {title}
+                                </TrkTitle>
                             </DialogTitle>
                         )}
 

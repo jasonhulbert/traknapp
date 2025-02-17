@@ -26,6 +26,7 @@
         "eslint": "^9",
         "eslint-config-next": "15.1.0",
         "eslint-config-prettier": "^9.1.0",
+        "eslint-plugin-import": "^2.31.0",
         "eslint-plugin-prettier": "^5.2.1",
         "framer-motion": "^11.14.4",
         "hugeicons-react": "^0.3.0",

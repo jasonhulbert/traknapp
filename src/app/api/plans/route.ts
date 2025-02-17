@@ -1,32 +1,94 @@
 import { NextRequest } from 'next/server';
 
-// export type Plan = {
-//     id: string;
-//     name: string;
-//     blocks: PlanBlock[];
-// };
-
-// export type PlanBlock = {
-//     id: string;
-//     description: string;
-//     setType: PlanBlockSetType;
-//     sets: Array<Partial<PlanBlockSet>>;
-// };
-
-// export type PlanBlockSet = {
-//     count: number;
-//     time: number;
-//     rest: number;
-// };
-
 const mockPlans = [
     {
         id: '1',
-        name: 'Plan 1',
+        name: 'Long Plan Title to Test Line Wrapping and Truncating',
         blocks: [
             {
-                id: 'b1',
-                description: 'Push-ups',
+                id: '1',
+                description: 'Push-Ups',
+                setType: 'rep',
+                sets: [
+                    {
+                        count: 10,
+                        time: 0,
+                        rest: 30
+                    },
+                    {
+                        count: 10,
+                        time: 0,
+                        rest: 30
+                    },
+                    {
+                        count: 10,
+                        time: 0,
+                        rest: 30
+                    },
+                    {
+                        count: 10,
+                        time: 0,
+                        rest: 30
+                    }
+                ]
+            },
+            {
+                id: '2',
+                description: 'Pull-Ups',
+                setType: 'rep',
+                sets: [
+                    {
+                        count: 10,
+                        time: 0,
+                        rest: 30
+                    },
+                    {
+                        count: 10,
+                        time: 0,
+                        rest: 30
+                    },
+                    {
+                        count: 10,
+                        time: 0,
+                        rest: 30
+                    },
+                    {
+                        count: 10,
+                        time: 0,
+                        rest: 30
+                    }
+                ]
+            },
+            {
+                id: '3',
+                description: 'Body-Weight Squats',
+                setType: 'rep',
+                sets: [
+                    {
+                        count: 30,
+                        time: 0,
+                        rest: 30
+                    },
+                    {
+                        count: 30,
+                        time: 0,
+                        rest: 30
+                    },
+                    {
+                        count: 30,
+                        time: 0,
+                        rest: 30
+                    },
+                    {
+                        count: 30,
+                        time: 0,
+                        rest: 30
+                    }
+                ]
+            },
+            {
+                id: '4',
+                description: 'Hanging Knee-to-Elbow Raises',
                 setType: 'rep',
                 sets: [
                     {

@@ -3,8 +3,9 @@ import { PropsWithChildren } from 'react';
 import { fontSans } from '@/lib/fonts/fonts';
 import { Providers } from './providers';
 import './globals.css';
-import TrkNavbar from '@/lib/ui/navbar/navbar';
-import TrkView from '@/lib/ui/view/view';
+import Image from 'next/image';
+import { TrkNavBar } from '@/lib/ui/nav-bar/nav-bar';
+import { TrkView } from '@/lib/ui/view/view';
 
 export const metadata: Metadata = {
     title: 'Trakn App',
@@ -16,7 +17,19 @@ export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
         <html lang="en">
             <body className={`${fontSans.className} antialiased`}>
                 <Providers>
-                    <TrkNavbar />
+                    <TrkNavBar
+                        slots={{
+                            middle: (
+                                <Image
+                                    src="/brand/logo_dark_color.svg"
+                                    alt="TRAKN"
+                                    width={100}
+                                    height={30}
+                                    className="h-6 w-auto"
+                                />
+                            )
+                        }}
+                    />
                     <TrkView>{children}</TrkView>
                 </Providers>
             </body>

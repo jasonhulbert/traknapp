@@ -10,11 +10,11 @@ import { TrkTitle } from '@/lib/ui/title/title';
 import { PropConst } from '@/lib/ui/prop-const';
 
 export type PlanBlockFormProps = {
-    initBlock?: Partial<PlanBlock>;
-    onSubmit: (block: Partial<PlanBlock>) => void;
+    block?: Partial<PlanBlock> | null;
+    onSubmit?: (block: Partial<PlanBlock>) => void;
 };
 
-export const PlanBlockForm: FC<PlanBlockFormProps> = ({ initBlock, onSubmit }): JSX.Element => {
+export const PlanBlockForm: FC<PlanBlockFormProps> = ({ block, onSubmit }): JSX.Element => {
     const [blockData, setBlockData] = useState<Partial<PlanBlock>>();
 
     const defaultBlockId = useRef<string>(uuid());
@@ -30,7 +30,7 @@ export const PlanBlockForm: FC<PlanBlockFormProps> = ({ initBlock, onSubmit }): 
                 rest: 30
             }
         ],
-        ...initBlock
+        ...block
     });
 
     const updateBlockSet = useCallback(
@@ -69,7 +69,7 @@ export const PlanBlockForm: FC<PlanBlockFormProps> = ({ initBlock, onSubmit }): 
             return;
         }
 
-        onSubmit(blockData);
+        onSubmit?.(blockData);
     }, [blockData, onSubmit]);
 
     useEffect(() => {
@@ -81,6 +81,7 @@ export const PlanBlockForm: FC<PlanBlockFormProps> = ({ initBlock, onSubmit }): 
             <div>
                 <TrkInput
                     label="Description"
+                    value={`${blockData?.description}`}
                     placeholder="'Pull Up', 'Sprint', 'Superman Hold', ..."
                     onChange={(e) =>
                         setBlockData((prev) => ({
@@ -93,6 +94,7 @@ export const PlanBlockForm: FC<PlanBlockFormProps> = ({ initBlock, onSubmit }): 
             <div>
                 <TrkSelect
                     label="Set Type"
+                    value={`${blockData?.setType}`}
                     onChange={(e) => {
                         setBlockData((prev) => ({
                             ...prev,
@@ -124,21 +126,15 @@ export const PlanBlockForm: FC<PlanBlockFormProps> = ({ initBlock, onSubmit }): 
                 </TrkSelect>
             </div>
             <div>
-                <div className="grid grid-cols-[1fr_1fr_1fr_auto] grid-rows-[auto_1fr] auto-rows-fr gap-4">
+                <div className="grid grid-cols-[1fr_1fr_1fr_auto] grid-rows-[auto_1fr] auto-rows-min gap-2">
                     <div>
-                        <TrkTitle size="xs" variant="subtle">
-                            Reps
-                        </TrkTitle>
+                        <TrkTitle size="sm">Reps</TrkTitle>
                     </div>
                     <div>
-                        <TrkTitle size="xs" variant="subtle">
-                            Duration
-                        </TrkTitle>
+                        <TrkTitle size="sm">Duration</TrkTitle>
                     </div>
                     <div>
-                        <TrkTitle size="xs" variant="subtle">
-                            Rest
-                        </TrkTitle>
+                        <TrkTitle size="sm">Rest</TrkTitle>
                     </div>
                     <div>&nbsp;</div>
                     {blockData?.sets?.map((set: Partial<PlanBlockSet>, index: number) => (
@@ -200,8 +196,8 @@ export const PlanBlockForm: FC<PlanBlockFormProps> = ({ initBlock, onSubmit }): 
                 </div>
             </div>
             <div className="flex items-center gap-x-2 justify-stretch">
-                <TrkButton theme="primary" onClick={submit} classNames={{ button: 'flex-1' }}>
-                    Save & Add
+                <TrkButton theme="primary" onClick={() => submit()} classNames={{ button: 'flex-1' }}>
+                    Save Block
                 </TrkButton>
             </div>
         </div>

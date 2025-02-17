@@ -7,7 +7,7 @@ export type TrkTitleProps = {
     classNames?: Partial<TrkTitleClassNames>;
     tag?: string;
     size?: PropConst<typeof TrkTitleSizes>;
-    variant?: PropConst<typeof TrkTitleVariants>;
+    truncate?: boolean;
 };
 
 export type TrkTitleClassNames = {
@@ -29,18 +29,16 @@ export const TrkTitleSizes = {
     XXXXLarge: '4xl'
 } as const;
 
-export const TrkTitleVariants = {
-    Default: 'default',
-    Subtle: 'subtle'
+export const TrkTitleOptions = {
+    Truncate: 'truncate'
 } as const;
 
-export const TrkTitle: FC<TrkTitleProps> = ({ children, size, variant, tag, classNames }): JSX.Element => {
+export const TrkTitle: FC<TrkTitleProps> = ({ children, classNames, size, truncate, tag }): JSX.Element => {
     size = size || TrkTitleSizes.Default;
-    variant = variant || TrkTitleVariants.Default;
 
     const baseClassNames = useMemo<TrkTitleClassNames>(
         () => ({
-            title: 'flex items-center gap-x-2'
+            title: 'block'
         }),
         []
     );
@@ -48,6 +46,7 @@ export const TrkTitle: FC<TrkTitleProps> = ({ children, size, variant, tag, clas
     const modClassNames = useMemo<Partial<TrkTitleModClassNames>>(
         () => ({
             title: {
+                truncate: !!truncate,
                 'text-xs': size === TrkTitleSizes.XSmall,
                 'text-sm': size === TrkTitleSizes.Small,
                 'text-base': size === TrkTitleSizes.Default,
@@ -55,12 +54,10 @@ export const TrkTitle: FC<TrkTitleProps> = ({ children, size, variant, tag, clas
                 'text-xl': size === TrkTitleSizes.XLarge,
                 'text-2xl': size === TrkTitleSizes.XXLarge,
                 'text-3xl': size === TrkTitleSizes.XXXLarge,
-                'text-4xl': size === TrkTitleSizes.XXXXLarge,
-                'font-bold tracking-tight text-neutral-700': variant === TrkTitleVariants.Default,
-                'font-semibold tracking-tight text-neutral-500': variant === TrkTitleVariants.Subtle
+                'text-4xl': size === TrkTitleSizes.XXXXLarge
             }
         }),
-        [size, variant]
+        [size, truncate]
     );
 
     const finalClassNames = useMemo<TrkTitleClassNames>(

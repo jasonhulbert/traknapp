@@ -1,18 +1,18 @@
 import { FC } from 'react';
-import { PlanList } from '@/components/plan-list/plan-list';
+import { PlanListView } from '@/components/plan-list-view/plan-list-view';
 
 const Page: FC = async () => {
     const plans = await fetchPlans();
 
-    return <>{plans ? <PlanList plans={plans} /> : <div>Failed to load plans</div>}</>;
+    return <>{plans ? <PlanListView plans={plans} /> : <div>Failed to load plans</div>}</>;
 };
 
 const fetchPlans = async () => {
     try {
-        const response = await fetch('http://localhost:3000/api/plans');
+        const response = await fetch(`${process.env.APP_API}/plans`);
 
         if (!response.ok) {
-            throw new Error('Failed to fetch plans');
+            throw new Error(`Failed to fetch plans:\n ${response.status}`);
         }
 
         return await response.json();

@@ -1,19 +1,20 @@
 import { FC, JSX } from 'react';
 import { PlanBlock } from '@/types/plan';
+import { TrkTitle } from '@/lib/ui/title/title';
 
 export const PlanBlocksItemExercise: FC<{ block: PlanBlock }> = ({ block }): JSX.Element => {
     return (
         <table className="table-fixed">
             <thead>
                 <tr>
-                    <th className="w-1/3 p-1 text-left text-xs font-medium uppercase tracking-wide text-neutral-400">
-                        Count
+                    <th className="text-left">
+                        <TrkTitle size="sm">Sets</TrkTitle>
                     </th>
-                    <th className="w-1/3 p-1 text-left text-xs font-medium uppercase tracking-wide text-neutral-400">
-                        Time
+                    <th className="text-left">
+                        <TrkTitle size="sm">Time</TrkTitle>
                     </th>
-                    <th className="w-1/3 p-1 text-left text-xs font-medium uppercase tracking-wide text-neutral-400">
-                        Rest
+                    <th className="text-left">
+                        <TrkTitle size="sm">Rest</TrkTitle>
                     </th>
                 </tr>
                 {block.sets.map((set, i) => (

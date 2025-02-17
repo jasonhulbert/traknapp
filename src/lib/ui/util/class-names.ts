@@ -17,7 +17,8 @@ export const joinClassNames = (classNames: Array<Record<string, boolean> | strin
             return Object.entries(className)
                 .filter(([, value]) => value)
                 .map(([key]) => key)
-                .join(' ');
+                .join(' ')
+                .trim();
         })
         .join(' ')
         .trim();
