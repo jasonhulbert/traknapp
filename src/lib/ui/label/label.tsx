@@ -1,10 +1,10 @@
-import { FC, JSX, useMemo } from 'react';
+import { FC, JSX, PropsWithChildren, useMemo } from 'react';
 import { joinClassNames } from '../util/class-names';
 
-export type TrkLabelProps = {
-    children: JSX.Element;
+export type TrkLabelProps = PropsWithChildren<{
     classNames?: Partial<TrkLabelClassNames>;
-};
+    htmlFor?: string;
+}>;
 
 export type TrkLabelClassNames = {
     label: string;
@@ -14,10 +14,10 @@ export const TrkLabelVariants = {
     Default: 'default'
 } as const;
 
-export const TrkLabel: FC<TrkLabelProps> = ({ children, classNames }): JSX.Element => {
+export const TrkLabel: FC<TrkLabelProps> = ({ children, classNames, htmlFor }): JSX.Element => {
     const baseClassNames = useMemo<TrkLabelClassNames>(
         () => ({
-            label: 'block text-neutral-800 font-semibold'
+            label: 'block text-neutral-800 text-sm font-semibold'
         }),
         []
     );
@@ -36,5 +36,9 @@ export const TrkLabel: FC<TrkLabelProps> = ({ children, classNames }): JSX.Eleme
         [baseClassNames, modClassNames, classNames]
     );
 
-    return <label className={finalClassNames.label}>{children}</label>;
+    return (
+        <label htmlFor={htmlFor} className={finalClassNames.label}>
+            {children}
+        </label>
+    );
 };

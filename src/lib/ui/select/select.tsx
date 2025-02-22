@@ -1,7 +1,7 @@
 import { ChangeEvent, FC, JSX, ReactNode, useMemo } from 'react';
 import { PropConst } from '../prop-const';
 import { joinClassNames } from '../util/class-names';
-import { ArrowDown01Icon } from 'hugeicons-react';
+import { ChevronDown } from 'lucide-react';
 import { TrkField, TrkFieldLabelPositions } from '../field/field';
 import { v4 as uuid } from 'uuid';
 
@@ -89,7 +89,7 @@ export const TrkSelect: FC<TrkSelectProps> = ({
     );
 
     return (
-        <TrkField label={label} labelPosition={labelPosition} labelFor={id}>
+        <TrkField label={label} labelPosition={labelPosition} htmlFor={id}>
             <div className={joinClassNames([baseClassNames.wrapper, modClassNames.wrapper, classNames?.wrapper])}>
                 <select
                     id={id}
@@ -108,7 +108,7 @@ export const TrkSelect: FC<TrkSelectProps> = ({
                         classNames?.selectArrow
                     ])}
                 >
-                    <ArrowDown01Icon width={24} height={24} />
+                    <ChevronDown size={24} />
                 </span>
             </div>
         </TrkField>

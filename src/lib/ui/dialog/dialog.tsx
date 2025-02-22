@@ -11,6 +11,7 @@ export type TrkDialogProps = {
     children: ReactNode;
     slots?: Partial<TrkDialogSlots>;
     variant?: PropConst<typeof TrkDialogVariants>;
+    size?: PropConst<typeof TrkDialogSize>;
     classNames?: Partial<TrkDialogClassNames>;
     onClose?: (value: boolean) => void;
 };
@@ -41,8 +42,14 @@ export const TrkDialogVariants = {
     Default: 'default'
 } as const;
 
+export const TrkDialogSize = {
+    Default: 'default',
+    Full: 'full'
+} as const;
+
 export const TrkDialog: FC<TrkDialogProps> = ({
     variant = TrkDialogVariants.Default,
+    size = TrkDialogSize.Default,
     id,
     children,
     slots,
@@ -58,12 +65,12 @@ export const TrkDialog: FC<TrkDialogProps> = ({
             dialog: 'relative z-[999]',
             backdrop: 'fixed inset-0 bg-background/60',
             container: 'fixed inset-0 flex w-screen h-screen items-center justify-center',
-            panel: "flex flex-col content-baseline relative w-[calc(100%-theme('spacing.8'))] h-auto max-w-[calc(theme('screens.sm')-theme('spacing.8'))] max-h-[calc(100vh-theme('spacing.8'))] mx-auto overflow-hidden border rounded-lg shadow-lg",
-            header: 'flex-shrink justify-self-start flex flex-nowrap gap-x-2 items-center justify-between min-h-fit p-4',
+            panel: 'flex flex-col content-baseline relative mx-auto overflow-hidden border rounded-lg shadow-lg',
+            header: 'flex-shrink justify-self-start flex flex-nowrap gap-x-2 items-center justify-between h-16 p-4 border-b border-neutral-100',
             headerTitle: '',
             headerUtils: 'flex flex-nowrap items-center gap-x-2',
-            body: 'flex-1 p-4 overflow-y-auto',
-            footer: 'flex-shrink justify-self-end min-h-fit p-4'
+            body: 'flex-1 p-4 overflow-y-auto bg-background',
+            footer: 'flex-shrink justify-self-end min-h-fit p-4 border-t border-neutral-100'
         }),
         []
     );
@@ -71,10 +78,14 @@ export const TrkDialog: FC<TrkDialogProps> = ({
     const modClassNames = useMemo<TrkDialogModClassNames>(
         () => ({
             panel: {
-                'bg-neutral-100/60 backdrop-blur-md border-neutral-100 shadow-md': variant === TrkDialogVariants.Default
+                'bg-neutral-100/60 backdrop-blur-md border-neutral-100 shadow-md':
+                    variant === TrkDialogVariants.Default,
+                "w-[calc(100%-theme('spacing.8'))] h-auto max-w-[calc(theme('screens.sm')-theme('spacing.8'))] max-h-[calc(100vh-theme('spacing.8'))]":
+                    size === TrkDialogSize.Default,
+                'w-full h-full': size === TrkDialogSize.Full
             }
         }),
-        [variant]
+        [variant, size]
     );
 
     const finalClassNames = useMemo<TrkDialogClassNames>(

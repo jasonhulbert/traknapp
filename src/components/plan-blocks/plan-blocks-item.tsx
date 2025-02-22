@@ -1,29 +1,43 @@
 import { FC, JSX } from 'react';
-import { Settings01Icon } from 'hugeicons-react';
 import { PlanBlock } from '@/types/plan';
 import { TrkButton } from '@/lib/ui/button/button';
 import { TrkCard } from '@/lib/ui/card/card';
 import { TrkTitle } from '@/lib/ui/title/title';
 import { PlanBlocksItemExercise } from './plan-blocks-item-exercise';
+import { Edit, Trash } from 'lucide-react';
 
-export type PlanBlocksItemProps = { block: PlanBlock; onEdit?: (block: PlanBlock) => void };
+export type PlanBlocksItemProps = {
+    block: PlanBlock;
+    onEdit?: (block: PlanBlock) => void;
+    onDelete?: (block: PlanBlock) => void;
+};
 
-export const PlanBlocksItem: FC<PlanBlocksItemProps> = ({ block, onEdit }): JSX.Element => {
+export const PlanBlocksItem: FC<PlanBlocksItemProps> = ({ block, onEdit, onDelete }): JSX.Element => {
     return (
         <TrkCard>
             <div className="flex items-center justify-between flex-nowrap gap-x-2 w-full p-4">
                 <div className="flex-shrink flex flex-col">
                     <TrkTitle size="lg">{block.description}</TrkTitle>
                 </div>
-                <div className="flex-1 flex items-center justify-end gap-x-2">
+                <div className="flex-1 flex items-center justify-end gap-x-3">
                     <TrkButton
-                        variant="flat"
+                        variant="ghost"
                         size="sm"
                         iconOnly={true}
                         radiusSize="full"
                         onClick={() => onEdit?.(block)}
                     >
-                        <Settings01Icon className="w-6 h-6" width={24} height={24} />
+                        <Edit size={32} />
+                    </TrkButton>
+                    <TrkButton
+                        variant="ghost"
+                        size="sm"
+                        iconOnly={true}
+                        radiusSize="full"
+                        theme="danger"
+                        onClick={() => onDelete?.(block)}
+                    >
+                        <Trash size={32} />
                     </TrkButton>
                 </div>
             </div>

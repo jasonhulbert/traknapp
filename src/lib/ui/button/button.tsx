@@ -30,7 +30,9 @@ export const TrkButtonVariants = {
 
 export const TrkButtonThemes = {
     DEFAULT: 'default',
-    Primary: 'primary'
+    Primary: 'primary',
+    Danger: 'danger',
+    Success: 'success'
 } as const;
 
 export const TrkButtonSizes = {
@@ -72,18 +74,34 @@ export const TrkButton: FC<TrkButtonProps> = ({
                     variant === TrkButtonVariants.DEFAULT && theme === TrkButtonThemes.DEFAULT,
                 'bg-primary-500 text-background border-transparent hover:bg-opacity-90':
                     variant === TrkButtonVariants.DEFAULT && theme === TrkButtonThemes.Primary,
+                'bg-danger-500 text-background border-transparent hover:bg-opacity-90':
+                    variant === TrkButtonVariants.DEFAULT && theme === TrkButtonThemes.Danger,
+                'bg-success-500 text-background border-transparent hover:bg-opacity-90':
+                    variant === TrkButtonVariants.DEFAULT && theme === TrkButtonThemes.Success,
                 'bg-neutral-500 bg-opacity-10 border-transparent text-neutral-500 hover:bg-opacity-20':
                     variant === TrkButtonVariants.Flat && theme === TrkButtonThemes.DEFAULT,
                 'bg-primary-500 bg-opacity-10 border-transparent text-primary-500 hover:bg-opacity-20':
                     variant === TrkButtonVariants.Flat && theme === TrkButtonThemes.Primary,
+                'bg-danger-500 bg-opacity-10 border-transparent text-danger-500 hover:bg-opacity-20':
+                    variant === TrkButtonVariants.Flat && theme === TrkButtonThemes.Danger,
+                'bg-success-500 bg-opacity-10 border-transparent text-success-500 hover:bg-opacity-20':
+                    variant === TrkButtonVariants.Flat && theme === TrkButtonThemes.Success,
                 'bg-neutral-500 bg-opacity-0 text-neutral-500 border-neutral-500 hover:bg-opacity-10':
                     variant === TrkButtonVariants.Outline && theme === TrkButtonThemes.DEFAULT,
                 'bg-primary-500 bg-opacity-0 text-primary-500 border-primary-500 hover:bg-opacity-10':
                     variant === TrkButtonVariants.Outline && theme === TrkButtonThemes.Primary,
+                'bg-danger-500 bg-opacity-0 text-danger-500 border-danger-500 hover:bg-opacity-10':
+                    variant === TrkButtonVariants.Outline && theme === TrkButtonThemes.Danger,
+                'bg-success-500 bg-opacity-0 text-success-500 border-success-500 hover:bg-opacity-10':
+                    variant === TrkButtonVariants.Outline && theme === TrkButtonThemes.Success,
                 'bg-neutral-500 bg-opacity-0 text-neutral-500 border-transparent hover:bg-opacity-10':
                     variant === TrkButtonVariants.Ghost && theme === TrkButtonThemes.DEFAULT,
                 'bg-primary-500 bg-opacity-0 text-primary-500 border-transparent hover:bg-opacity-10':
                     variant === TrkButtonVariants.Ghost && theme === TrkButtonThemes.Primary,
+                'bg-danger-500 bg-opacity-0 text-danger-500 border-transparent hover:bg-opacity-10':
+                    variant === TrkButtonVariants.Ghost && theme === TrkButtonThemes.Danger,
+                'bg-success-500 bg-opacity-0 text-success-500 border-transparent hover:bg-opacity-10':
+                    variant === TrkButtonVariants.Ghost && theme === TrkButtonThemes.Success,
                 'h-10 text-base': size == TrkButtonSizes.Small,
                 'h-12 text-lg': size == TrkButtonSizes.DEFAULT,
                 'h-14 text-xl': size == TrkButtonSizes.Medium,

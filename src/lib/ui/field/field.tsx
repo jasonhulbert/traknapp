@@ -1,13 +1,14 @@
 import { FC, JSX, ReactNode, useMemo } from 'react';
 import { resolveFinalClassNames } from '../util/class-names';
 import { PropConst } from '../prop-const';
+import { TrkLabel } from '../label/label';
 
 export type TrkFieldProps = {
     children: ReactNode;
     classNames?: Partial<TrkFieldClassNames>;
     label?: string;
     labelPosition?: PropConst<typeof TrkFieldLabelPositions>;
-    labelFor?: string;
+    htmlFor?: string;
 };
 
 export type TrkFieldClassNames = {
@@ -26,11 +27,11 @@ export const TrkFieldLabelPositions = {
     None: 'none'
 } as const;
 
-export const TrkField: FC<TrkFieldProps> = ({ children, classNames, label, labelPosition, labelFor }): JSX.Element => {
+export const TrkField: FC<TrkFieldProps> = ({ children, classNames, label, labelPosition, htmlFor }): JSX.Element => {
     const baseClassNames = useMemo<TrkFieldClassNames>(
         () => ({
             wrapper: 'relative flex flex-col gap-y-1 w-full',
-            label: 'text-sm font-medium text-neutral-500',
+            label: '',
             control: 'relative w-auto'
         }),
         []
@@ -53,9 +54,9 @@ export const TrkField: FC<TrkFieldProps> = ({ children, classNames, label, label
     return (
         <div className={finalClassNames.wrapper}>
             {label && (
-                <label htmlFor={labelFor} className={finalClassNames.label}>
+                <TrkLabel htmlFor={htmlFor} classNames={{ label: finalClassNames.label }}>
                     {label}
-                </label>
+                </TrkLabel>
             )}
             <div className={finalClassNames.control}>{children}</div>
         </div>

@@ -2,11 +2,11 @@ import { NextRequest } from 'next/server';
 
 const mockPlans = [
     {
-        id: '1',
+        id: crypto.randomUUID(),
         name: 'Long Plan Title to Test Line Wrapping and Truncating',
         blocks: [
             {
-                id: '1',
+                id: crypto.randomUUID(),
                 description: 'Push-Ups',
                 setType: 'rep',
                 sets: [
@@ -33,7 +33,7 @@ const mockPlans = [
                 ]
             },
             {
-                id: '2',
+                id: crypto.randomUUID(),
                 description: 'Pull-Ups',
                 setType: 'rep',
                 sets: [
@@ -60,7 +60,7 @@ const mockPlans = [
                 ]
             },
             {
-                id: '3',
+                id: crypto.randomUUID(),
                 description: 'Body-Weight Squats',
                 setType: 'rep',
                 sets: [
@@ -87,7 +87,7 @@ const mockPlans = [
                 ]
             },
             {
-                id: '4',
+                id: crypto.randomUUID(),
                 description: 'Hanging Knee-to-Elbow Raises',
                 setType: 'rep',
                 sets: [
@@ -120,11 +120,13 @@ const mockPlans = [
 export async function GET(request: NextRequest): Promise<Response> {
     const id = request.nextUrl.searchParams.get('id');
 
-    console.log(id);
-
-    if (id) {
-        return Response.json(mockPlans.find((plan) => plan.id === id));
-    } else {
-        return Response.json(mockPlans);
-    }
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            if (id) {
+                resolve(Response.json(mockPlans.find((plan) => plan.id === id)));
+            } else {
+                resolve(Response.json(mockPlans));
+            }
+        }, 1000); // Mock delay
+    });
 }
