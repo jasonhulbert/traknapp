@@ -1,5 +1,6 @@
 import { FC, Fragment, JSX, useMemo } from 'react';
 import { resolveFinalClassNames } from '../util/class-names';
+import { Slash } from 'lucide-react';
 
 export type TrkNavBarMetaProps = {
     slots: Partial<TrkNavBarMetaClassNamesSlots>;
@@ -8,12 +9,12 @@ export type TrkNavBarMetaProps = {
 };
 
 export type TrkNavBarMetaClassNames = {
-    context: string;
-    contextTitle: string;
-    contextTitleText: string;
-    contextTitleBreadcrumbs: string;
-    contextTitleBreadcrumbsLink: string;
-    contextActions: string;
+    meta: string;
+    metaTitle: string;
+    metaTitleText: string;
+    metaTitleBreadcrumbs: string;
+    metaTitleBreadcrumbsLink: string;
+    metaActions: string;
 };
 
 export type TrkNavBarMetaModClassNames = {
@@ -28,19 +29,19 @@ export type TrkNavBarMetaClassNamesSlots = {
 export const TrkNavBarMeta: FC<TrkNavBarMetaProps> = ({ slots, classNames, breadcrumbs }): JSX.Element => {
     const baseClassNames = useMemo<TrkNavBarMetaClassNames>(
         () => ({
-            context: 'flex flex-nowrap items-center gap-x-3 px-4 w-full h-16',
-            contextTitle: 'flex-1 min-w-0 truncate',
-            contextTitleText: 'leading-none text-base',
-            contextTitleBreadcrumbs: 'flex items-center gap-x-1 text-sm text-neutral-400 leading-none',
-            contextTitleBreadcrumbsLink: '',
-            contextActions: 'flex flex-none flex-nowrap items-center gap-x-3'
+            meta: 'flex flex-nowrap items-center gap-x-3 px-4 w-full h-16',
+            metaTitle: 'flex-1 w-auto mr-auto truncate',
+            metaTitleText: 'leading-none text-base',
+            metaTitleBreadcrumbs: 'flex items-center gap-x-1 text-sm text-neutral-300 leading-none',
+            metaTitleBreadcrumbsLink: '',
+            metaActions: 'flex flex-none flex-nowrap items-center gap-x-3'
         }),
         []
     );
 
     const modClassNames = useMemo<Partial<TrkNavBarMetaModClassNames>>(
         () => ({
-            context: {
+            meta: {
                 'justify-between': !!slots.actions
             }
         }),
@@ -58,19 +59,21 @@ export const TrkNavBarMeta: FC<TrkNavBarMetaProps> = ({ slots, classNames, bread
     );
 
     return (
-        <div className={finalClassNames.context}>
-            <div className={finalClassNames.contextTitle}>
-                <nav className={finalClassNames.contextTitleBreadcrumbs}>
-                    {breadcrumbs?.map((breadcrumb, i) => (
-                        <Fragment key={i}>
-                            {breadcrumb}
-                            &nbsp;&rsaquo;&nbsp;
-                        </Fragment>
-                    ))}
-                </nav>
-                <div className={finalClassNames.contextTitleText}>{slots.title}</div>
+        <div className={finalClassNames.meta}>
+            <div className={finalClassNames.metaTitle}>
+                {breadcrumbs && (
+                    <nav className={finalClassNames.metaTitleBreadcrumbs}>
+                        {breadcrumbs?.map((breadcrumb, i) => (
+                            <Fragment key={i}>
+                                {breadcrumb}
+                                <Slash size={12} />
+                            </Fragment>
+                        ))}
+                    </nav>
+                )}
+                {slots.title && <div className={finalClassNames.metaTitleText}>{slots.title}</div>}
             </div>
-            <div className={finalClassNames.contextActions}>{slots.actions}</div>
+            <div className={finalClassNames.metaActions}>{slots.actions}</div>
         </div>
     );
 };
