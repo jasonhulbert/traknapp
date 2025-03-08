@@ -1,12 +1,11 @@
 'use client';
 
-import { FC, JSX, useEffect, useMemo } from 'react';
+import { FC, JSX, useMemo } from 'react';
 import { useNavBar } from './nav-bar-provider';
 import { TrkNavBarMeta } from './nav-bar-meta';
-import { resolveFinalClassNames } from '../util/class-names';
+import { resolveFinalClassNames } from '../util/selectors';
 import { TrkTitle } from '../title/title';
 import { TrkNavBarGlobal } from './nav-bar-global';
-import { usePathname, useSearchParams } from 'next/navigation';
 
 export type TrkNavBarProps = {
     classNames?: Partial<TrkNavBarClassNames>;
@@ -30,9 +29,7 @@ export type TrkNavBarSlots = {
 };
 
 export const TrkNavBar: FC<TrkNavBarProps> = ({ classNames, slots }) => {
-    const { title, breadcrumbs, actions, setTitle, setBreadcrumbs, setActions } = useNavBar();
-    const searchParams = useSearchParams();
-    const pathname = usePathname();
+    const { title, breadcrumbs, actions } = useNavBar();
 
     const baseClassNames = useMemo<TrkNavBarClassNames>(
         () => ({
@@ -57,13 +54,6 @@ export const TrkNavBar: FC<TrkNavBarProps> = ({ classNames, slots }) => {
             ) as TrkNavBarClassNames,
         [baseClassNames, modClassNames, classNames]
     );
-
-    // Reset title, breadcrumbs, and actions whenever route pathname or search params change
-    useEffect(() => {
-        setTitle('');
-        setBreadcrumbs([]);
-        setActions(<></>);
-    }, [pathname, searchParams, setTitle, setBreadcrumbs, setActions]);
 
     return (
         <div className={finalClassNames.navBar}>

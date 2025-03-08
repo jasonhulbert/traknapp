@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { FC, ReactNode, useMemo } from 'react';
-import { resolveFinalClassNames } from '../util/class-names';
+import { resolveFinalClassNames } from '../util/selectors';
 
 export type TrkLinkProps = {
     children: ReactNode;

@@ -1,5 +1,5 @@
 import { FC, JSX, useMemo } from 'react';
-import { resolveFinalClassNames } from '../util/class-names';
+import { resolveFinalClassNames } from '../util/selectors';
 
 export type TrkNavBarGlobalProps = {
     classNames?: Partial<TrkNavBarGlobalClassNames>;

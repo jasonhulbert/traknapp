@@ -1,5 +1,5 @@
 import { FC, Fragment, JSX, useCallback, useEffect, useRef, useState } from 'react';
-import { CircleMinus, CirclePlus, X } from 'lucide-react';
+import { CircleMinus, CirclePlus } from 'lucide-react';
 import { TrkButton } from '@/lib/ui/button/button';
 import { TrkDialog } from '@/lib/ui/dialog';
 import { PlanBlock, PlanBlockSet } from '@/types/plan';
@@ -110,19 +110,18 @@ export const PlanBlockFormDialog: FC<PlanBlockFormDialogProps> = ({
 
     useEffect(() => {
         setBlockData(defaultBlock.current);
+
+        return () => {
+            setBlockData(undefined);
+        };
     }, [defaultBlock]);
 
     return (
         <TrkDialog
             id={dialogId}
             title={blockData?.id ? 'Edit Block' : 'Add Block'}
-            size="full"
+            size="default"
             slots={{
-                headerUtils: (
-                    <TrkButton size="sm" variant="ghost" iconOnly={true} radiusSize="full" onClick={() => onCancel?.()}>
-                        <X size={32} />
-                    </TrkButton>
-                ),
                 footer: (
                     <div className="flex items-center gap-3">
                         <TrkButton

@@ -1,5 +1,5 @@
 import { FC, JSX, PropsWithChildren, useMemo } from 'react';
-import { joinClassNames } from '../util/class-names';
+import { joinClassNames } from '../util/selectors';
 
 export type TrkLabelProps = PropsWithChildren<{
     classNames?: Partial<TrkLabelClassNames>;

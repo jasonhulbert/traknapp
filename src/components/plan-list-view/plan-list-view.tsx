@@ -17,11 +17,13 @@ export type PlanListViewProps = {
 
 export const PlanListView: FC<PlanListViewProps> = ({ plans }): JSX.Element => {
     const setPlans = useAppStore((state) => state.setPlans);
-    const { setTitle, setBreadcrumbs, setActions } = useNavBar();
+    const { setTitle, setBreadcrumbs, setActions, resetNavbar } = useNavBar();
 
     useEffect(() => {
         setPlans(plans ?? []);
+    }, [plans, setPlans]);
 
+    useEffect(() => {
         setTitle('Plans');
 
         setBreadcrumbs(
@@ -40,7 +42,11 @@ export const PlanListView: FC<PlanListViewProps> = ({ plans }): JSX.Element => {
                 </TrkButton>
             </>
         );
-    }, [plans, setPlans, setTitle, setBreadcrumbs, setActions]);
+
+        return () => {
+            resetNavbar();
+        };
+    }, [setTitle, setBreadcrumbs, setActions, resetNavbar]);
 
     return (
         <TrkView variant="inset">

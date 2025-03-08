@@ -1,11 +1,11 @@
 import { FC, Fragment, JSX, useMemo } from 'react';
-import { resolveFinalClassNames } from '../util/class-names';
+import { resolveFinalClassNames } from '../util/selectors';
 import { Slash } from 'lucide-react';
 
 export type TrkNavBarMetaProps = {
     slots: Partial<TrkNavBarMetaClassNamesSlots>;
     classNames?: Partial<TrkNavBarMetaClassNames>;
-    breadcrumbs?: JSX.Element[];
+    breadcrumbs?: JSX.Element[] | null;
 };
 
 export type TrkNavBarMetaClassNames = {

@@ -1,6 +1,6 @@
 import { FC, useMemo } from 'react';
 import { PropConst } from '../prop-const';
-import { resolveFinalClassNames } from '../util/class-names';
+import { resolveFinalClassNames } from '../util/selectors';
 import { Loader } from 'lucide-react';
 
 export type TrkLoadingProps = {

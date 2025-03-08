@@ -1,6 +1,6 @@
 import { ChangeEvent, FC, JSX, ReactNode, useMemo } from 'react';
 import { PropConst } from '../prop-const';
-import { joinClassNames } from '../util/class-names';
+import { joinClassNames } from '../util/selectors';
 import { ChevronDown } from 'lucide-react';
 import { TrkField, TrkFieldLabelPositions } from '../field/field';
 import { v4 as uuid } from 'uuid';

@@ -1,5 +1,5 @@
 import { FC, JSX, ReactNode, useMemo } from 'react';
-import { resolveFinalClassNames } from '../util/class-names';
+import { resolveFinalClassNames } from '../util/selectors';
 import { PropConst } from '../prop-const';
 
 export type TrkButtonProps = {
