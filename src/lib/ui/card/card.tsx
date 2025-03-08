@@ -35,7 +35,7 @@ export const TrkCard: FC<TrkCardProps> = ({ children, classNames, variant }): JS
         () => ({
             card: {
                 'bg-neutral-50 border-neutral-100': variant === TrkCardVariants.Default,
-                'bg-gradient-to-br from-background from-0% via-neutral-50 via-20% to-background to-100% bg-opacity-50 backdrop-blur-md border-neutral-200':
+                'bg-linear-to-br from-background from-0% via-neutral-50 via-20% to-background to-100% bg-opacity-50 backdrop-blur-md border-neutral-200':
                     variant === TrkCardVariants.Glass
             }
         }),

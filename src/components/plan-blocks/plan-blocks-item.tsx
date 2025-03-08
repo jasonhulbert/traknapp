@@ -16,7 +16,7 @@ export const PlanBlocksItem: FC<PlanBlocksItemProps> = ({ block, onEdit, onDelet
     return (
         <TrkCard>
             <div className="flex items-center justify-between flex-nowrap gap-x-2 w-full p-4">
-                <div className="flex-shrink flex flex-col">
+                <div className="shrink flex flex-col">
                     <TrkTitle size="lg">{block.description}</TrkTitle>
                 </div>
                 <div className="flex-1 flex items-center justify-end gap-x-3">

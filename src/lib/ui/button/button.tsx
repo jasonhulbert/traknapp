@@ -62,7 +62,7 @@ export const TrkButton: FC<TrkButtonProps> = ({
 }): JSX.Element => {
     const baseClassNames = useMemo<TrkButtonClassNames>(
         () => ({
-            button: 'appearance-none outline-none inline-flex items-center justify-center align-middle gap-x-2 font-semibold flex-nowrap whitespace-nowrap leading-none border-2 transition-all duration-200 focus-visible:ring focus-visible:ring-primary-500 focus-visible:ring-opacity-30'
+            button: 'appearance-none outline-hidden inline-flex items-center justify-center align-middle gap-x-2 font-semibold flex-nowrap whitespace-nowrap leading-none border-2 transition-all duration-200 focus-visible:ring-3 focus-visible:ring-primary-500 focus-visible:ring-opacity-30'
         }),
         []
     );

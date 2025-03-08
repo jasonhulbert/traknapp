@@ -59,7 +59,7 @@ export const TrkInput: FC<TrkInputProps> = ({
 }): JSX.Element => {
     const baseClassNames: TrkInputClassNames = {
         wrapper: 'relative flex flex-col gap-y-1 w-full',
-        input: 'appearance-none outline-none w-full h-12 px-3 text-lg leading-tight font-regular rounded border transition-all duration-200 focus-visible:ring focus-visible:ring-primary-500 focus-visible:ring-opacity-30 selection:bg-primary-500 selection:bg-opacity-50',
+        input: 'appearance-none outline-hidden w-full h-12 px-3 text-lg leading-tight font-regular rounded border transition-all duration-200 focus-visible:ring-3 focus-visible:ring-primary-500 focus-visible:ring-opacity-30 selection:bg-primary-500 selection:bg-opacity-50',
         label: 'text-sm font-medium'
     };
 

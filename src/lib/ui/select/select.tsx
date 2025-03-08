@@ -58,7 +58,7 @@ export const TrkSelect: FC<TrkSelectProps> = ({
 }): JSX.Element => {
     const baseClassNames: TrkSelectClassNames = {
         wrapper: 'relative w-full',
-        select: 'appearance-none outline-none w-full h-12 px-3 pr-12 text-lg leading-tight font-normal rounded border transition-all duration-200 focus-visible:ring focus-visible:ring-primary-500 focus-visible:ring-opacity-30 selection:bg-primary-500 selection:bg-opacity-50',
+        select: 'appearance-none outline-hidden w-full h-12 px-3 pr-12 text-lg leading-tight font-normal rounded border transition-all duration-200 focus-visible:ring-3 focus-visible:ring-primary-500 focus-visible:ring-opacity-30 selection:bg-primary-500 selection:bg-opacity-50',
         selectArrow:
             'pointer-events-none absolute top-0 right-0 flex items-center justify-center w-12 h-full text-foreground *:w-6 *:h-6'
     };
