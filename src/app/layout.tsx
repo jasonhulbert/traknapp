@@ -1,7 +1,6 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { PropsWithChildren } from 'react';
-import Image from 'next/image';
 import { fontSans } from '@/lib/fonts/fonts';
 import { RootLayoutProviders } from './providers';
 import { TrkNavBar } from '@/lib/ui/nav-bar/nav-bar';
@@ -19,13 +18,9 @@ export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
                     <TrkNavBar
                         slots={{
                             middle: (
-                                <Image
-                                    src="/brand/logo_dark_color.svg"
-                                    alt="TRAKN"
-                                    width={100}
-                                    height={30}
-                                    className="h-6 w-auto"
-                                />
+                                <span className="flex items-center justify-center align-middle h-8 px-1 font-black text-2xl tracking-tighter leading-8 text-white transform -skew-x-15">
+                                    TRAKN
+                                </span>
                             )
                         }}
                     />

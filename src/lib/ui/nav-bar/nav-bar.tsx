@@ -33,7 +33,7 @@ export const TrkNavBar: FC<TrkNavBarProps> = ({ classNames, slots }) => {
 
     const baseClassNames = useMemo<TrkNavBarClassNames>(
         () => ({
-            navBar: 'sticky inset-0 bottom-auto flex flex-col w-full h-auto bg-neutral-100/60 backdrop-blur-md shadow-md'
+            navBar: 'z-40 sticky inset-0 bottom-auto flex flex-col w-full h-auto bg-stone-200/40 backdrop-blur-md'
         }),
         []
     );
@@ -64,7 +64,7 @@ export const TrkNavBar: FC<TrkNavBarProps> = ({ classNames, slots }) => {
                 slots={{
                     title:
                         typeof title === 'string' ? (
-                            <TrkTitle tag="h1" truncate={true}>
+                            <TrkTitle tag="h1" weight={600} truncate={true}>
                                 {title}
                             </TrkTitle>
                         ) : (

@@ -1,6 +1,6 @@
 import { FC, Fragment, JSX, useMemo } from 'react';
 import { resolveFinalClassNames } from '../util/selectors';
-import { Slash } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 
 export type TrkNavBarMetaProps = {
     slots: Partial<TrkNavBarMetaClassNamesSlots>;
@@ -13,7 +13,6 @@ export type TrkNavBarMetaClassNames = {
     metaTitle: string;
     metaTitleText: string;
     metaTitleBreadcrumbs: string;
-    metaTitleBreadcrumbsLink: string;
     metaActions: string;
 };
 
@@ -29,11 +28,10 @@ export type TrkNavBarMetaClassNamesSlots = {
 export const TrkNavBarMeta: FC<TrkNavBarMetaProps> = ({ slots, classNames, breadcrumbs }): JSX.Element => {
     const baseClassNames = useMemo<TrkNavBarMetaClassNames>(
         () => ({
-            meta: 'flex flex-nowrap items-center gap-x-3 px-4 w-full h-16',
+            meta: 'flex flex-nowrap items-center gap-x-3 px-4 w-full h-14 border-b border-stone-300/40',
             metaTitle: 'flex-1 w-auto mr-auto truncate',
-            metaTitleText: 'leading-none text-base',
-            metaTitleBreadcrumbs: 'flex items-center gap-x-1 text-sm text-neutral-300 leading-none',
-            metaTitleBreadcrumbsLink: '',
+            metaTitleText: 'leading-none text-base font-medium',
+            metaTitleBreadcrumbs: 'flex items-center gap-x-1 text-xs font-medium text-stone-500 leading-none',
             metaActions: 'flex flex-none flex-nowrap items-center gap-x-3'
         }),
         []
@@ -66,7 +64,7 @@ export const TrkNavBarMeta: FC<TrkNavBarMetaProps> = ({ slots, classNames, bread
                         {breadcrumbs?.map((breadcrumb, i) => (
                             <Fragment key={i}>
                                 {breadcrumb}
-                                <Slash size={12} />
+                                <ChevronRight size={12} />
                             </Fragment>
                         ))}
                     </nav>

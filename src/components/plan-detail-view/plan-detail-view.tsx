@@ -52,19 +52,8 @@ export const PlanDetailView: FC<PlanDetailViewProps> = ({ plan }): JSX.Element =
         }));
     }, [dialogState, setDialogState]);
 
-    const deleteBlock = useCallback(
-        (block: PlanBlock) => {
-            plan.blocks = plan.blocks.filter((b) => b.id !== block.id);
-
-            updatePlan(plan);
-        },
-        [plan, updatePlan]
-    );
-
     const onBlockFormSubmit = useCallback(
         (block: Partial<PlanBlock> | null | undefined) => {
-            console.log('onBlockFormSubmit', block);
-
             // If there's an existing block, update it. Otherwise, add a new block and generate an ID.
             // TODO: Remove the ID generation and utilize an ID from the server.
             if (block?.id) {
@@ -96,7 +85,7 @@ export const PlanDetailView: FC<PlanDetailViewProps> = ({ plan }): JSX.Element =
 
         setActions(
             <>
-                <TrkButton size="sm" theme="primary" onClick={() => openBlockFormDialog()}>
+                <TrkButton size="sm" variant="outline" theme="primary" onClick={() => openBlockFormDialog()}>
                     <Plus size={16} />
                     Add Block
                 </TrkButton>
@@ -110,16 +99,12 @@ export const PlanDetailView: FC<PlanDetailViewProps> = ({ plan }): JSX.Element =
 
     return (
         <TrkView variant="inset">
-            <PlanBlocks
-                blocks={plan?.blocks}
-                onEdit={(block: PlanBlock) => openBlockFormDialog(block)}
-                onDelete={(block) => deleteBlock(block)}
-            ></PlanBlocks>
+            <PlanBlocks blocks={plan?.blocks} onEdit={(block: PlanBlock) => openBlockFormDialog(block)}></PlanBlocks>
 
             {editingBlock && (
                 <PlanBlockFormDialog
                     dialogId={blockFormDialogId.current}
-                    block={editingBlock ?? {}}
+                    initBlock={editingBlock ?? {}}
                     onSubmit={(block) => onBlockFormSubmit(block)}
                     onCancel={() => closeBlockFormDialog()}
                 ></PlanBlockFormDialog>

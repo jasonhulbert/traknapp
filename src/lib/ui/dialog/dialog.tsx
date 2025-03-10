@@ -1,6 +1,5 @@
 import { FC, JSX, ReactNode, ReactPortal, useEffect, useMemo, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import { motion as Motion } from 'motion/react';
 import { useTrkDialog } from './dialog-provider';
 import { resolveFinalClassNames } from '../util/selectors';
 import { TrkTitle } from '../title/title';
@@ -16,6 +15,7 @@ export type TrkDialogProps = {
     slots?: Partial<TrkDialogSlots>;
     variant?: PropConst<typeof TrkDialogVariants>;
     size?: PropConst<typeof TrkDialogSize>;
+    backdrop?: boolean;
     classNames?: Partial<TrkDialogClassNames>;
     onClose?: (id: string) => void;
 };
@@ -54,6 +54,7 @@ export const TrkDialogSize = {
 export const TrkDialog: FC<TrkDialogProps> = ({
     variant = TrkDialogVariants.Default,
     size = TrkDialogSize.Default,
+    backdrop = true,
     id,
     children,
     slots,
@@ -68,15 +69,15 @@ export const TrkDialog: FC<TrkDialogProps> = ({
 
     const baseClassNames = useMemo<TrkDialogClassNames>(
         () => ({
-            dialog: 'z-999 fixed inset-0 flex w-screen h-screen items-center justify-center',
-            backdrop: 'fixed inset-0 bg-background/80',
-            window: 'flex flex-col content-baseline relative mx-auto overflow-hidden border rounded-lg shadow-lg',
-            header: 'shrink justify-self-start flex flex-nowrap gap-x-2 items-center justify-between h-16 p-4 border-b border-neutral-100',
+            dialog: 'z-[999] fixed inset-0 flex w-screen h-screen items-center justify-center',
+            backdrop: 'fixed inset-0 bg-black/40',
+            window: 'flex flex-col content-baseline relative mx-auto overflow-hidden rounded-lg',
+            header: 'shrink justify-self-start flex flex-nowrap gap-x-2 items-center justify-between h-16 p-4 bg-stone-100',
             headerTitle: '',
             headerUtils: 'flex flex-nowrap items-center gap-x-2',
             headerCloseBtn: '',
-            body: 'flex-1 p-4 overflow-y-auto bg-background/80',
-            footer: 'shrink justify-self-end min-h-fit p-4 border-t border-neutral-100'
+            body: 'flex-1 p-6 overflow-y-auto bg-white',
+            footer: 'shrink justify-self-end min-h-fit p-4 bg-stone-100'
         }),
         []
     );
@@ -84,8 +85,8 @@ export const TrkDialog: FC<TrkDialogProps> = ({
     const modClassNames = useMemo<TrkDialogModClassNames>(
         () => ({
             window: {
-                'bg-neutral-100/80 border-neutral-100 shadow-md': variant === TrkDialogVariants.Default,
-                "w-[calc(100%-(--spacing(8)))] h-auto max-w-[calc(var(--breakpoint-sm)-(--spacing(8)))] max-h-[calc(100vh-(--spacing(8)))]":
+                'border border-stone-300 shadow-md': variant === TrkDialogVariants.Default,
+                'w-[calc(100%-(--spacing(8)))] h-auto max-w-[calc(var(--breakpoint-sm)-(--spacing(8)))] max-h-[calc(100vh-(--spacing(8)))]':
                     size === TrkDialogSize.Default,
                 'w-full h-full': size === TrkDialogSize.Full
             }
@@ -143,37 +144,34 @@ export const TrkDialog: FC<TrkDialogProps> = ({
     }
 
     return createPortal(
-        <Motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-            <div className={finalClassNames.dialog} ref={dialogRef}>
-                <div className={finalClassNames.backdrop} onClick={() => onClose(id)}></div>
-                <div className={finalClassNames.window}>
-                    <div className={finalClassNames.header}>
-                        {title && (
-                            <TrkTitle classNames={{ title: finalClassNames.headerTitle }} size="lg">
-                                {title}
-                            </TrkTitle>
-                        )}
+        <div className={finalClassNames.dialog} ref={dialogRef}>
+            {backdrop && <div className={finalClassNames.backdrop} onClick={() => onClose(id)}></div>}
+            <div className={finalClassNames.window}>
+                <div className={finalClassNames.header}>
+                    {title && (
+                        <TrkTitle size="xl" weight={700} classNames={{ title: finalClassNames.headerTitle }}>
+                            {title}
+                        </TrkTitle>
+                    )}
 
-                        <div className={finalClassNames.headerUtils}>
-                            {slots?.headerUtils}
+                    <div className={finalClassNames.headerUtils}>
+                        {slots?.headerUtils}
 
-                            <TrkButton
-                                classNames={{ button: finalClassNames.headerCloseBtn }}
-                                size="sm"
-                                variant="ghost"
-                                radiusSize="full"
-                                iconOnly={true}
-                                onClick={() => onClose(id)}
-                            >
-                                <X size={24} />
-                            </TrkButton>
-                        </div>
+                        <TrkButton
+                            classNames={{ button: finalClassNames.headerCloseBtn }}
+                            size="sm"
+                            variant="ghost"
+                            iconOnly={true}
+                            onClick={() => onClose(id)}
+                        >
+                            <X size={24} />
+                        </TrkButton>
                     </div>
-                    <div className={finalClassNames.body}>{children}</div>
-                    {slots?.footer && <div className={finalClassNames.footer}>{slots.footer}</div>}
                 </div>
+                <div className={finalClassNames.body}>{children}</div>
+                {slots?.footer && <div className={finalClassNames.footer}>{slots.footer}</div>}
             </div>
-        </Motion.div>,
+        </div>,
         document.body
     );
 };

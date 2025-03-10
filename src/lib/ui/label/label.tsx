@@ -1,5 +1,6 @@
 import { FC, JSX, PropsWithChildren, useMemo } from 'react';
 import { joinClassNames } from '../util/selectors';
+import { fontSansTight } from '@/lib/fonts/fonts';
 
 export type TrkLabelProps = PropsWithChildren<{
     classNames?: Partial<TrkLabelClassNames>;
@@ -17,7 +18,7 @@ export const TrkLabelVariants = {
 export const TrkLabel: FC<TrkLabelProps> = ({ children, classNames, htmlFor }): JSX.Element => {
     const baseClassNames = useMemo<TrkLabelClassNames>(
         () => ({
-            label: 'block text-neutral-800 text-sm font-semibold'
+            label: `block text-xs leading-tight font-medium ${fontSansTight.className}`
         }),
         []
     );

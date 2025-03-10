@@ -7,26 +7,27 @@ const mockPlans = [
         blocks: [
             {
                 id: crypto.randomUUID(),
+                type: 'exercise',
                 description: 'Push-Ups',
-                setType: 'rep',
+                setType: 'reps',
                 sets: [
                     {
-                        count: 10,
+                        reps: 10,
                         time: 0,
                         rest: 30
                     },
                     {
-                        count: 10,
+                        reps: 10,
                         time: 0,
                         rest: 30
                     },
                     {
-                        count: 10,
+                        reps: 10,
                         time: 0,
                         rest: 30
                     },
                     {
-                        count: 10,
+                        reps: 10,
                         time: 0,
                         rest: 30
                     }
@@ -34,26 +35,27 @@ const mockPlans = [
             },
             {
                 id: crypto.randomUUID(),
+                type: 'exercise',
                 description: 'Pull-Ups',
-                setType: 'rep',
+                setType: 'reps',
                 sets: [
                     {
-                        count: 10,
+                        reps: 10,
                         time: 0,
                         rest: 30
                     },
                     {
-                        count: 10,
+                        reps: 10,
                         time: 0,
                         rest: 30
                     },
                     {
-                        count: 10,
+                        reps: 10,
                         time: 0,
                         rest: 30
                     },
                     {
-                        count: 10,
+                        reps: 10,
                         time: 0,
                         rest: 30
                     }
@@ -61,26 +63,27 @@ const mockPlans = [
             },
             {
                 id: crypto.randomUUID(),
+                type: 'exercise',
                 description: 'Body-Weight Squats',
-                setType: 'rep',
+                setType: 'reps',
                 sets: [
                     {
-                        count: 30,
+                        reps: 30,
                         time: 0,
                         rest: 30
                     },
                     {
-                        count: 30,
+                        reps: 30,
                         time: 0,
                         rest: 30
                     },
                     {
-                        count: 30,
+                        reps: 30,
                         time: 0,
                         rest: 30
                     },
                     {
-                        count: 30,
+                        reps: 30,
                         time: 0,
                         rest: 30
                     }
@@ -88,26 +91,27 @@ const mockPlans = [
             },
             {
                 id: crypto.randomUUID(),
+                type: 'exercise',
                 description: 'Hanging Knee-to-Elbow Raises',
-                setType: 'rep',
+                setType: 'reps',
                 sets: [
                     {
-                        count: 10,
+                        reps: 10,
                         time: 0,
                         rest: 30
                     },
                     {
-                        count: 10,
+                        reps: 10,
                         time: 0,
                         rest: 30
                     },
                     {
-                        count: 10,
+                        reps: 10,
                         time: 0,
                         rest: 30
                     },
                     {
-                        count: 10,
+                        reps: 10,
                         time: 0,
                         rest: 30
                     }

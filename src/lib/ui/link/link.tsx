@@ -19,7 +19,7 @@ export type TrkLinkModClassNames = {
 export const TrkLink: FC<TrkLinkProps> = ({ children, href, classNames }) => {
     const baseClassNames = useMemo<TrkLinkClassNames>(
         () => ({
-            link: 'text-primary-500'
+            link: 'text-violet-700'
         }),
         []
     );

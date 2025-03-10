@@ -30,9 +30,9 @@ export const TrkFieldLabelPositions = {
 export const TrkField: FC<TrkFieldProps> = ({ children, classNames, label, labelPosition, htmlFor }): JSX.Element => {
     const baseClassNames = useMemo<TrkFieldClassNames>(
         () => ({
-            wrapper: 'relative flex flex-col gap-y-1 w-full',
-            label: '',
-            control: 'relative w-auto'
+            wrapper: 'group relative flex flex-col gap-y-1 w-full',
+            label: 'text-stone-500 group-focus-within:text-stone-800',
+            control: 'w-auto'
         }),
         []
     );
@@ -40,7 +40,12 @@ export const TrkField: FC<TrkFieldProps> = ({ children, classNames, label, label
     const modClassNames = useMemo<TrkFieldModClassNames>(
         () => ({
             label: {
-                'none sr-only': labelPosition === 'none'
+                'order-0 none sr-only': labelPosition === 'none',
+                'order-1 absolute top-0 left-0 w-full truncate !leading-4 !pt-1 !px-2': labelPosition === 'inside'
+            },
+            control: {
+                'order-1': labelPosition === 'default' || labelPosition === 'none',
+                'order-0': labelPosition === 'inside'
             }
         }),
         [labelPosition]
@@ -53,12 +58,12 @@ export const TrkField: FC<TrkFieldProps> = ({ children, classNames, label, label
 
     return (
         <div className={finalClassNames.wrapper}>
+            <div className={finalClassNames.control}>{children}</div>
             {label && (
                 <TrkLabel htmlFor={htmlFor} classNames={{ label: finalClassNames.label }}>
                     {label}
                 </TrkLabel>
             )}
-            <div className={finalClassNames.control}>{children}</div>
         </div>
     );
 };

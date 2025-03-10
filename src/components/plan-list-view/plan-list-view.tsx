@@ -36,7 +36,7 @@ export const PlanListView: FC<PlanListViewProps> = ({ plans }): JSX.Element => {
 
         setActions(
             <>
-                <TrkButton size="sm" theme="primary">
+                <TrkButton size="sm" theme="primary" variant="outline">
                     <Plus size={16} />
                     Add Plan
                 </TrkButton>
@@ -51,12 +51,17 @@ export const PlanListView: FC<PlanListViewProps> = ({ plans }): JSX.Element => {
     return (
         <TrkView variant="inset">
             {plans?.map((plan: Plan) => (
-                <TrkCard key={plan.id}>
-                    <div className="flex flex-col gap-y-1 items-start p-4">
-                        <TrkTitle size="xl" tag="h2" classNames={{ title: 'block w-full' }}>
-                            {plan.name}
-                        </TrkTitle>
-
+                <TrkCard
+                    key={plan.id}
+                    slots={{
+                        headerStart: (
+                            <TrkTitle weight={700} size="lg" tag="h2">
+                                {plan.name}
+                            </TrkTitle>
+                        )
+                    }}
+                >
+                    <div className="flex flex-col gap-y-1 items-start">
                         <TrkLink href={`/plans/${plan.id}`}>View/Edit Plan</TrkLink>
                     </div>
                 </TrkCard>
