@@ -27,7 +27,13 @@ export const TrkFieldLabelPositions = {
     None: 'none'
 } as const;
 
-export const TrkField: FC<TrkFieldProps> = ({ children, classNames, label, labelPosition, htmlFor }): JSX.Element => {
+export const TrkField: FC<TrkFieldProps> = ({
+    children,
+    classNames,
+    label,
+    htmlFor,
+    labelPosition = TrkFieldLabelPositions.DEFAULT
+}): JSX.Element => {
     const baseClassNames = useMemo<TrkFieldClassNames>(
         () => ({
             wrapper: 'group relative flex flex-col gap-y-1 w-full',

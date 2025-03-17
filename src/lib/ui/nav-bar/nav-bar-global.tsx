@@ -26,10 +26,10 @@ export type TrkNavBarGlobalSlots = {
 export const TrkNavBarGlobal: FC<TrkNavBarGlobalProps> = ({ classNames, slots }) => {
     const baseClassNames = useMemo<TrkNavBarGlobalClassNames>(
         () => ({
-            global: 'grid grid-cols-[25%_1fr_25%] items-center w-full h-12 p-2 gap-2 bg-black border-b border-stone-300/40',
-            globalStart: 'mr-auto',
-            globalMiddle: 'flex flex-1 justify-center items-center',
-            globalEnd: 'ml-auto'
+            global: 'grid grid-cols-[1fr_auto_1fr] items-center w-full h-14 py-2 px-4 gap-2 bg-white/80 border-b border-stone-300/40',
+            globalStart: 'flex justify-start items-center w-auto',
+            globalMiddle: 'flex justify-center items-center w-auto',
+            globalEnd: 'flex justify-end items-center w-auto'
         }),
         []
     );

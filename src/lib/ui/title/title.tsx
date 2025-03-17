@@ -1,7 +1,6 @@
 import { FC, JSX, ReactNode, useMemo } from 'react';
 import { resolveFinalClassNames } from '../util/selectors';
 import { PropConst } from '@/lib/ui/prop-const';
-import { fontSansTight } from '@/lib/fonts/fonts';
 
 export type TrkTitleProps = {
     children: ReactNode;
@@ -61,7 +60,7 @@ export const TrkTitle: FC<TrkTitleProps> = ({
 
     const baseClassNames = useMemo<TrkTitleClassNames>(
         () => ({
-            title: `block ${fontSansTight.className}`
+            title: `block font-sans-tight`
         }),
         []
     );

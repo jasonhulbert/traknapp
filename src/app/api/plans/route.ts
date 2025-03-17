@@ -125,12 +125,10 @@ export async function GET(request: NextRequest): Promise<Response> {
     const id = request.nextUrl.searchParams.get('id');
 
     return new Promise((resolve) => {
-        setTimeout(() => {
-            if (id) {
-                resolve(Response.json(mockPlans.find((plan) => plan.id === id)));
-            } else {
-                resolve(Response.json(mockPlans));
-            }
-        }, 1000); // Mock delay
+        if (id) {
+            resolve(Response.json(mockPlans.find((plan) => plan.id === id)));
+        } else {
+            resolve(Response.json(mockPlans));
+        }
     });
 }

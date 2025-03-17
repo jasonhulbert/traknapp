@@ -36,7 +36,7 @@ export const TrkBadge: FC<TrkBadgeProps> = ({
 }): JSX.Element => {
     const baseClassNames = useMemo<TrkBadgeClassNames>(
         () => ({
-            badge: 'inline-flex items-center w-auto py-1 px-2 text-xs font-medium uppercase leading-none border rounded-full'
+            badge: 'inline-flex items-center w-auto py-1 px-2 text-xs font-medium leading-none border rounded-full'
         }),
         []
     );

@@ -1,5 +1,5 @@
 import { FC, JSX } from 'react';
-import { MoreHorizontal } from 'lucide-react';
+import { Edit3 } from 'lucide-react';
 import { PlanBlock, PlanExerciseBlock } from '@/types/plan';
 import { TrkButton } from '@/lib/ui/button/button';
 import { TrkCard } from '@/lib/ui/card/card';
@@ -32,13 +32,13 @@ export const PlanBlocksItem: FC<PlanBlocksItemProps> = ({ block, onEdit }): JSX.
                             iconOnly={true}
                             onClick={() => onEdit?.(block)}
                         >
-                            <MoreHorizontal size={32} />
+                            <Edit3 size={32} />
                         </TrkButton>
                     </div>
                 ),
                 footerStart: (
                     <div className="flex-1">
-                        <TrkBadge>{block.type}</TrkBadge>
+                        <TrkBadge>#{block.type}</TrkBadge>
                     </div>
                 )
             }}

@@ -59,7 +59,7 @@ export const TrkLoading: FC<TrkLoadingProps> = ({
                 'w-8': size === TrkLoadingSize.Default,
                 'w-12': size === TrkLoadingSize.Large,
                 'text-stone-500': theme === TrkLoadingTheme.Default,
-                'text-violet-500': theme === TrkLoadingTheme.Primary
+                'text-primary-500': theme === TrkLoadingTheme.Primary
             }
         }),
         [variant, size, theme]

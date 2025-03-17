@@ -1,10 +1,12 @@
 import { FC, JSX, PropsWithChildren, useMemo } from 'react';
 import { joinClassNames } from '../util/selectors';
-import { fontSansTight } from '@/lib/fonts/fonts';
+import { PropConst } from '../prop-const';
 
 export type TrkLabelProps = PropsWithChildren<{
     classNames?: Partial<TrkLabelClassNames>;
     htmlFor?: string;
+    variant?: PropConst<typeof TrkLabelVariants>;
+    size?: PropConst<typeof TrkLabelSizes>;
 }>;
 
 export type TrkLabelClassNames = {
@@ -15,10 +17,14 @@ export const TrkLabelVariants = {
     Default: 'default'
 } as const;
 
+export const TrkLabelSizes = {
+    Default: 'default'
+} as const;
+
 export const TrkLabel: FC<TrkLabelProps> = ({ children, classNames, htmlFor }): JSX.Element => {
     const baseClassNames = useMemo<TrkLabelClassNames>(
         () => ({
-            label: `block text-xs leading-tight font-medium ${fontSansTight.className}`
+            label: `block text-xs leading-tight font-medium`
         }),
         []
     );

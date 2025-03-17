@@ -1,4 +1,5 @@
-import React, { createContext, FC, JSX, PropsWithChildren, useCallback, useContext, useState } from 'react';
+import { useParams, useSearchParams } from 'next/navigation';
+import React, { createContext, FC, JSX, PropsWithChildren, useCallback, useContext, useEffect, useState } from 'react';
 
 export type TrkNavBarProviderProps = PropsWithChildren;
 
@@ -18,12 +19,26 @@ export const TrkNavBarProvider: FC<TrkNavBarProviderProps> = ({ children }) => {
     const [title, setTitle] = useState<JSX.Element | string | undefined>(undefined);
     const [breadcrumbs, setBreadcrumbs] = useState<JSX.Element[] | undefined>(undefined);
     const [actions, setActions] = useState<JSX.Element | undefined>(undefined);
+    const params = useParams();
+    const searchParams = useSearchParams();
 
     const resetNavbar = useCallback(() => {
         setTitle(undefined);
         setBreadcrumbs(undefined);
         setActions(undefined);
     }, [setTitle, setBreadcrumbs, setActions]);
+
+    useEffect(() => {
+        resetNavbar();
+    }, [params, searchParams, resetNavbar]);
+
+    useEffect(() => {
+        if (title || breadcrumbs || actions) {
+            return;
+        }
+
+        resetNavbar();
+    }, [title, breadcrumbs, actions, resetNavbar]);
 
     return (
         <TrkNavBarContext.Provider

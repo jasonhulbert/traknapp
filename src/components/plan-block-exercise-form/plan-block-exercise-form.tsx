@@ -7,8 +7,6 @@ import { TrkSelect } from '@/lib/ui/select/select';
 import { TrkButton } from '@/lib/ui/button/button';
 import { CircleMinus, CirclePlus } from 'lucide-react';
 import { TrkTextarea } from '@/lib/ui/textarea/textarea';
-import { TrkTitle } from '@/lib/ui/title/title';
-import { TrkHr } from '@/lib/ui/hr/hr';
 
 export type PlanBlockExerciseFormProps = {
     initBlock: Partial<PlanBlock>;
@@ -135,12 +133,6 @@ export const PlanBlockExerciseForm: React.FC<PlanBlockExerciseFormProps> = ({ in
                     </TrkSelect>
                 </div>
                 <div className="col-span-2">
-                    <TrkHr />
-                    <TrkTitle tag="h3" size="lg">
-                        Sets
-                    </TrkTitle>
-                </div>
-                <div className="col-span-2">
                     <div className="grid grid-cols-[1fr_1fr_auto] gap-3">
                         {blockData?.sets?.map((set: Partial<PlanExerciseBlockSet>, index: number) => (
                             <Fragment key={index}>
@@ -206,12 +198,6 @@ export const PlanBlockExerciseForm: React.FC<PlanBlockExerciseFormProps> = ({ in
                             </Fragment>
                         ))}
                     </div>
-                </div>
-                <div className="col-span-2">
-                    <TrkHr />
-                    <TrkTitle tag="h3" size="lg">
-                        Notes
-                    </TrkTitle>
                 </div>
                 <div className="col-span-2">
                     <TrkTextarea

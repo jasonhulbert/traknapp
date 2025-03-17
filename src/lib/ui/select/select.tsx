@@ -3,7 +3,6 @@ import { PropConst } from '../prop-const';
 import { joinClassNames } from '../util/selectors';
 import { ChevronDown } from 'lucide-react';
 import { TrkField, TrkFieldLabelPositions } from '../field/field';
-import { v4 as uuid } from 'uuid';
 
 export type TrkSelectProps = {
     children: ReactNode;
@@ -40,6 +39,7 @@ export const TrkSelectVariants = {
 } as const;
 
 export const TrkSelect: FC<TrkSelectProps> = ({
+    id,
     children,
     classNames,
     label,
@@ -47,14 +47,13 @@ export const TrkSelect: FC<TrkSelectProps> = ({
     value,
     disabled,
     onChange,
-    id = uuid(),
     theme = TrkSelectThemes.DEFAULT,
     variant = TrkSelectVariants.DEFAULT,
     labelPosition = TrkFieldLabelPositions.DEFAULT
 }): JSX.Element => {
     const baseClassNames: TrkSelectClassNames = {
         wrapper: 'relative w-full',
-        select: 'appearance-none outline-hidden w-full h-14 px-2 pr-10 text-base leading-tight font-normal rounded border transition-all duration-200 focus:ring-2 focus:ring-violet-500/50',
+        select: 'appearance-none outline-hidden w-full h-14 px-2 pr-10 text-base leading-tight font-normal rounded border transition-all duration-200 focus:ring-2 focus:ring-primary-500/50',
         selectArrow:
             'pointer-events-none absolute top-0 right-0 flex items-center justify-center w-10 h-full text-current *:w-4 *:h-4'
     };

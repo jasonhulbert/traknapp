@@ -36,7 +36,7 @@ export const PlanListView: FC<PlanListViewProps> = ({ plans }): JSX.Element => {
 
         setActions(
             <>
-                <TrkButton size="sm" theme="primary" variant="outline">
+                <TrkButton size="sm" theme="primary">
                     <Plus size={16} />
                     Add Plan
                 </TrkButton>

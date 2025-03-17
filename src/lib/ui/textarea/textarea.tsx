@@ -33,12 +33,12 @@ export const TrkTextareaVariants = {
 } as const;
 
 export const TrkTextarea: React.FC<TrkTextareaProps> = ({
+    id,
     value,
     placeholder,
     onChange,
     classNames,
     label,
-    id = crypto.randomUUID(),
     disabled = false,
     labelPosition = TrkFieldLabelPositions.DEFAULT,
     theme = TrkTextareThemes.DEFAULT,
@@ -50,7 +50,7 @@ export const TrkTextarea: React.FC<TrkTextareaProps> = ({
     const baseClassNames = useMemo<TrkTextareaClassNames>(
         () => ({
             textarea:
-                'appearance-none outline-none w-full min-h-24 p-2 text-base leading-tight border rounded transition-all duration-200 focus:ring-2 focus:ring-violet-500/50'
+                'appearance-none outline-none w-full min-h-24 p-2 text-base leading-tight border rounded transition-all duration-200 focus:ring-2 focus:ring-primary-500/50'
         }),
         []
     );

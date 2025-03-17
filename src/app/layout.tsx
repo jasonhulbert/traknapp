@@ -1,9 +1,11 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { PropsWithChildren } from 'react';
-import { fontSans } from '@/lib/fonts/fonts';
+import { fontSans, fontSansTight } from '@/lib/fonts/fonts';
 import { RootLayoutProviders } from './providers';
 import { TrkNavBar } from '@/lib/ui/nav-bar/nav-bar';
+import { NavbarGlobalUtils } from '@/components/navbar-global-utils/navbar-global-utils';
+import { NavbarGlobalBrand } from '@/components/navbar-global-brand/navbar-global-brand';
 
 export const metadata: Metadata = {
     title: 'Trakn App',
@@ -12,16 +14,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
     return (
-        <html lang="en">
-            <body className={`${fontSans.className} antialiased`}>
+        <html lang="en" className={`${fontSans.variable} ${fontSansTight.variable} antialiased`}>
+            <body>
                 <RootLayoutProviders>
                     <TrkNavBar
                         slots={{
-                            middle: (
-                                <span className="flex items-center justify-center align-middle h-8 px-1 font-black text-2xl tracking-tighter leading-8 text-white transform -skew-x-15">
-                                    TRAKN
-                                </span>
-                            )
+                            middle: <NavbarGlobalBrand />,
+                            end: <NavbarGlobalUtils />
                         }}
                     />
                     {children}

@@ -11,6 +11,22 @@
   --radius-2xl: 1.5rem;
   --radius-3xl: 2rem;
   --radius-full: 9999px;
+
+  --font-sans: var(--font-inter-sans);
+  --font-sans-tight: var(--font-inter-tight-sans);
+
+  --color-primary: oklch(62.74% 0.1057 200.53);
+  --color-primary-50: color-mix(in oklch, var(--color-primary), white 60%);
+  --color-primary-100: color-mix(in oklch, var(--color-primary), white 50%);
+  --color-primary-200: color-mix(in oklch, var(--color-primary), white 40%);
+  --color-primary-300: color-mix(in oklch, var(--color-primary), white 30%);
+  --color-primary-400: color-mix(in oklch, var(--color-primary), white 20%);
+  --color-primary-500: var(--color-primary);
+  --color-primary-600: color-mix(in oklch, var(--color-primary), black 20%);
+  --color-primary-700: color-mix(in oklch, var(--color-primary), black 30%);
+  --color-primary-800: color-mix(in oklch, var(--color-primary), black 40%);
+  --color-primary-900: color-mix(in oklch, var(--color-primary), black 50%);
+  --color-primary-950: color-mix(in oklch, var(--color-primary), black 60%);
 }
 
 /*
@@ -32,5 +48,5 @@
 }
 
 body, html {
-    @apply text-stone-800 bg-stone-200;
+    @apply h-full text-stone-800 bg-stone-200 font-sans;
 }

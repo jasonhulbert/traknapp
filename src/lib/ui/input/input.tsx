@@ -9,7 +9,7 @@ export type TrkInputProps = {
     label?: string;
     labelPosition?: PropConst<typeof TrkFieldLabelPositions>;
     placeholder?: string;
-    type?: string;
+    type?: 'text' | 'password' | 'email' | 'number';
     name?: string;
     value?: string;
     disabled?: boolean;
@@ -35,6 +35,7 @@ export const TrkInputVariants = {
 } as const;
 
 export const TrkInput: FC<TrkInputProps> = ({
+    id,
     classNames,
     label,
     placeholder,
@@ -42,7 +43,6 @@ export const TrkInput: FC<TrkInputProps> = ({
     name,
     value,
     onChange,
-    id = crypto.randomUUID(),
     disabled = false,
     theme = TrkInputThemes.DEFAULT,
     variant = TrkInputVariants.DEFAULT,
@@ -50,7 +50,7 @@ export const TrkInput: FC<TrkInputProps> = ({
 }): JSX.Element => {
     const baseClassNames = useMemo<TrkInputClassNames>(
         () => ({
-            input: 'appearance-none outline-hidden w-full h-14 px-2 text-base leading-tight font-regular rounded border transition-all duration-200 focus:ring-2 focus:ring-violet-500/50'
+            input: 'appearance-none outline-hidden w-full h-14 px-2 text-base leading-tight font-regular rounded border transition-all duration-200 focus:ring-2 focus:ring-primary-500/50'
         }),
         []
     );

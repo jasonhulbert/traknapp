@@ -85,7 +85,7 @@ export const PlanDetailView: FC<PlanDetailViewProps> = ({ plan }): JSX.Element =
 
         setActions(
             <>
-                <TrkButton size="sm" variant="outline" theme="primary" onClick={() => openBlockFormDialog()}>
+                <TrkButton size="sm" theme="primary" onClick={() => openBlockFormDialog()}>
                     <Plus size={16} />
                     Add Block
                 </TrkButton>
