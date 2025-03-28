@@ -7,6 +7,7 @@ import { TrkSelect } from '@/lib/ui/select/select';
 import { TrkButton } from '@/lib/ui/button/button';
 import { CircleMinus, CirclePlus } from 'lucide-react';
 import { TrkTextarea } from '@/lib/ui/textarea/textarea';
+import { TrkField } from '@/lib/ui/field/field';
 
 export type PlanBlockExerciseFormProps = {
     initBlock: Partial<PlanBlock>;
@@ -133,76 +134,77 @@ export const PlanBlockExerciseForm: React.FC<PlanBlockExerciseFormProps> = ({ in
                     </TrkSelect>
                 </div>
                 <div className="col-span-2">
-                    <div className="grid grid-cols-[1fr_1fr_auto] gap-3">
-                        {blockData?.sets?.map((set: Partial<PlanExerciseBlockSet>, index: number) => (
-                            <Fragment key={index}>
-                                {blockData?.setType === PlanExerciseBlockSetType.Reps && (
+                    <TrkField label="Set Details">
+                        <div className="grid grid-cols-[1fr_1fr_auto] gap-4">
+                            {blockData?.sets?.map((set: Partial<PlanExerciseBlockSet>, index: number) => (
+                                <Fragment key={index}>
+                                    {blockData?.setType === PlanExerciseBlockSetType.Reps && (
+                                        <div className="flex items-center">
+                                            <TrkInput
+                                                id={`block-form-reps-${index}`}
+                                                label="Reps"
+                                                labelPosition="inside"
+                                                type="number"
+                                                value={`${set.reps}`}
+                                                onChange={(e) => updateBlockSet(index, e.target.value, 'reps')}
+                                            ></TrkInput>
+                                        </div>
+                                    )}
+                                    {blockData?.setType === PlanExerciseBlockSetType.Time && (
+                                        <div className="flex items-center">
+                                            <TrkInput
+                                                id={`block-form-time-${index}`}
+                                                label="Time"
+                                                labelPosition="inside"
+                                                type="number"
+                                                value={`${set.time}`}
+                                                onChange={(e) => updateBlockSet(index, e.target.value, 'time')}
+                                            ></TrkInput>
+                                        </div>
+                                    )}
                                     <div className="flex items-center">
                                         <TrkInput
-                                            id={`block-form-reps-${index}`}
-                                            label="Reps"
+                                            id={`block-form-rest-${index}`}
+                                            label="Rest"
                                             labelPosition="inside"
                                             type="number"
-                                            value={`${set.reps}`}
-                                            onChange={(e) => updateBlockSet(index, e.target.value, 'reps')}
+                                            value={`${set.rest}`}
+                                            onChange={(e) => updateBlockSet(index, e.target.value, 'rest')}
                                         ></TrkInput>
                                     </div>
-                                )}
-                                {blockData?.setType === PlanExerciseBlockSetType.Time && (
-                                    <div className="flex items-center">
-                                        <TrkInput
-                                            id={`block-form-time-${index}`}
-                                            label="Time"
-                                            labelPosition="inside"
-                                            type="number"
-                                            value={`${set.time}`}
-                                            onChange={(e) => updateBlockSet(index, e.target.value, 'time')}
-                                        ></TrkInput>
+                                    <div className="flex items-center gap-2">
+                                        <TrkButton
+                                            size="sm"
+                                            theme="danger"
+                                            variant="ghost"
+                                            radiusSize="full"
+                                            iconOnly={true}
+                                            onClick={() => removeBlockSet(index)}
+                                        >
+                                            <CircleMinus size={24} />
+                                        </TrkButton>
+                                        {!blockData?.sets?.length ||
+                                            (blockData?.sets?.length - 1 === index && (
+                                                <TrkButton
+                                                    size="sm"
+                                                    theme="success"
+                                                    variant="ghost"
+                                                    radiusSize="full"
+                                                    iconOnly={true}
+                                                    onClick={() => addBlockSet()}
+                                                >
+                                                    <CirclePlus size={24} />
+                                                </TrkButton>
+                                            ))}
                                     </div>
-                                )}
-                                <div className="flex items-center">
-                                    <TrkInput
-                                        id={`block-form-rest-${index}`}
-                                        label="Rest"
-                                        labelPosition="inside"
-                                        type="number"
-                                        value={`${set.rest}`}
-                                        onChange={(e) => updateBlockSet(index, e.target.value, 'rest')}
-                                    ></TrkInput>
-                                </div>
-                                <div className="flex items-center gap-2">
-                                    <TrkButton
-                                        theme="danger"
-                                        variant="ghost"
-                                        size="sm"
-                                        radiusSize="full"
-                                        iconOnly={true}
-                                        onClick={() => removeBlockSet(index)}
-                                    >
-                                        <CircleMinus size={32} />
-                                    </TrkButton>
-                                    {!blockData?.sets?.length ||
-                                        (blockData?.sets?.length - 1 === index && (
-                                            <TrkButton
-                                                theme="success"
-                                                variant="ghost"
-                                                size="sm"
-                                                radiusSize="full"
-                                                iconOnly={true}
-                                                onClick={() => addBlockSet()}
-                                            >
-                                                <CirclePlus size={32} />
-                                            </TrkButton>
-                                        ))}
-                                </div>
-                            </Fragment>
-                        ))}
-                    </div>
+                                </Fragment>
+                            ))}
+                        </div>
+                    </TrkField>
                 </div>
                 <div className="col-span-2">
                     <TrkTextarea
                         label="Notes"
-                        labelPosition="inside"
                         value={blockData?.notes}
                         onChange={(value: string) => updateNotes(value)}
                     ></TrkTextarea>

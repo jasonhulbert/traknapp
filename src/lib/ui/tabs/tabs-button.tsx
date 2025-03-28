@@ -44,7 +44,7 @@ export const TrkTabsButton: React.FC<TrkTabsButtonProps> = ({
             button: {
                 'text-black': !active && theme === TrkTabsButtonThemes.DEFAULT,
                 'text-primary-700 bg-primary-500/10': active && theme === TrkTabsButtonThemes.DEFAULT,
-                'hover:bg-stone-500/10': !active && theme === TrkTabsButtonThemes.DEFAULT
+                'hover:bg-gray-500/10': !active && theme === TrkTabsButtonThemes.DEFAULT
             }
         }),
         [active, theme]

@@ -24,6 +24,7 @@ export const TrkTabsProvider: React.FC<TrkTabsProviderProps> = ({ children, acti
     const handleTabChange = useCallback(
         (tabId: string) => {
             setActive(tabId);
+
             onTabChange?.(tabId);
         },
         [setActive, onTabChange]

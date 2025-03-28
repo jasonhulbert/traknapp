@@ -19,9 +19,12 @@ import { useTrkTabs } from '@/lib/ui/tabs/tabs-provider';
 export type SignupFormData = {
     email: string;
     password: string;
+    firstName: string;
+    lastName: string;
+    dob: string;
 };
 
-export type LoginFormData = {
+export type SigninFormData = {
     email: string;
     password: string;
 };
@@ -36,9 +39,12 @@ export const LoginView: FC = () => {
     }, [router]);
 
     const signin = useCallback(
-        async (email: string, password: string) => {
+        async (formData: SigninFormData) => {
             try {
-                const { data } = (await client?.auth.signInWithPassword({ email, password })) ?? { data: null };
+                const { data } = (await client?.auth.signInWithPassword({
+                    email: formData.email,
+                    password: formData.password
+                })) ?? { data: null };
 
                 if (data && data.session) {
                     setSession(data?.session);
@@ -51,9 +57,19 @@ export const LoginView: FC = () => {
     );
 
     const signup = useCallback(
-        async (email: string, password: string) => {
+        async (formData: SignupFormData) => {
             try {
-                const { data } = (await client?.auth.signUp({ email, password })) ?? { data: null };
+                const { data } = (await client?.auth.signUp({
+                    email: formData.email,
+                    password: formData.password,
+                    options: {
+                        data: {
+                            first_name: formData.firstName,
+                            last_name: formData.lastName,
+                            dob: formData.dob
+                        }
+                    }
+                })) ?? { data: null };
 
                 if (data && data.session) {
                     setSession(data?.session);
@@ -67,10 +83,13 @@ export const LoginView: FC = () => {
 
     const [signupFormData, setSignupFormData] = useState<SignupFormData>({
         email: '',
-        password: ''
+        password: '',
+        firstName: '',
+        lastName: '',
+        dob: ''
     });
 
-    const [signinFormData, setLoginFormData] = useState<LoginFormData>({
+    const [signinFormData, setSigninFormData] = useState<SigninFormData>({
         email: '',
         password: ''
     });
@@ -122,10 +141,7 @@ export const LoginView: FC = () => {
                                 ),
                                 footerEnd: (
                                     <div className="flex items-center gap-2">
-                                        <TrkButton
-                                            theme="primary"
-                                            onClick={() => signup(signupFormData.email, signupFormData.password)}
-                                        >
+                                        <TrkButton theme="primary" onClick={() => signup(signupFormData)}>
                                             Continue
                                         </TrkButton>
                                     </div>
@@ -163,6 +179,51 @@ export const LoginView: FC = () => {
                                         />
                                     </TrkField>
                                 </div>
+                                <div className="col-span-2">
+                                    <TrkField>
+                                        <TrkInput
+                                            label="First Name"
+                                            value={signupFormData?.firstName}
+                                            onChange={(evt) =>
+                                                setSignupFormData((prev: SignupFormData) => ({
+                                                    ...prev,
+                                                    firstName: evt.target.value
+                                                }))
+                                            }
+                                            type="text"
+                                        />
+                                    </TrkField>
+                                </div>
+                                <div className="col-span-2">
+                                    <TrkField>
+                                        <TrkInput
+                                            label="Last Name"
+                                            value={signupFormData?.lastName}
+                                            onChange={(evt) =>
+                                                setSignupFormData((prev: SignupFormData) => ({
+                                                    ...prev,
+                                                    lastName: evt.target.value
+                                                }))
+                                            }
+                                            type="text"
+                                        />
+                                    </TrkField>
+                                </div>
+                                <div className="col-span-2">
+                                    <TrkField>
+                                        <TrkInput
+                                            label="DOB"
+                                            value={signupFormData?.dob}
+                                            onChange={(evt) =>
+                                                setSignupFormData((prev: SignupFormData) => ({
+                                                    ...prev,
+                                                    dob: evt.target.value
+                                                }))
+                                            }
+                                            type="text"
+                                        />
+                                    </TrkField>
+                                </div>
                             </div>
                         </TrkCard>
                     </div>
@@ -197,10 +258,7 @@ export const LoginView: FC = () => {
                                 ),
                                 footerEnd: (
                                     <div className="flex items-center gap-2">
-                                        <TrkButton
-                                            theme="primary"
-                                            onClick={() => signin(signinFormData.email, signinFormData.password)}
-                                        >
+                                        <TrkButton theme="primary" onClick={() => signin(signinFormData)}>
                                             Submit
                                         </TrkButton>
                                     </div>
@@ -214,7 +272,7 @@ export const LoginView: FC = () => {
                                             label="Email"
                                             value={signinFormData?.email}
                                             onChange={(evt) =>
-                                                setLoginFormData((prev: LoginFormData) => ({
+                                                setSigninFormData((prev: SigninFormData) => ({
                                                     ...prev,
                                                     email: evt.target.value
                                                 }))
@@ -229,7 +287,7 @@ export const LoginView: FC = () => {
                                             label="Password"
                                             value={signinFormData?.password}
                                             onChange={(evt) =>
-                                                setLoginFormData((prev: LoginFormData) => ({
+                                                setSigninFormData((prev: SigninFormData) => ({
                                                     ...prev,
                                                     password: evt.target.value
                                                 }))
@@ -244,7 +302,7 @@ export const LoginView: FC = () => {
                 )
             }
         ],
-        [signupFormData, setSignupFormData, signinFormData, setLoginFormData, active, signin, signup]
+        [signupFormData, setSignupFormData, signinFormData, setSigninFormData, active, signin, signup]
     );
 
     const trkTabsButtons = useMemo(

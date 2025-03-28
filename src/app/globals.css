@@ -27,6 +27,8 @@
   --color-primary-800: color-mix(in oklch, var(--color-primary), black 40%);
   --color-primary-900: color-mix(in oklch, var(--color-primary), black 50%);
   --color-primary-950: color-mix(in oklch, var(--color-primary), black 60%);
+
+  --color-foreground: var(--color-gray-700);
 }
 
 /*
@@ -48,5 +50,5 @@
 }
 
 body, html {
-    @apply h-full text-stone-800 bg-stone-200 font-sans;
+    @apply h-full text-foreground bg-gray-200 font-sans;
 }

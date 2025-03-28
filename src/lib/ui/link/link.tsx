@@ -1,10 +1,11 @@
 import Link from 'next/link';
-import { FC, ReactNode, useMemo } from 'react';
+import { FC, ReactNode, useEffect, useMemo } from 'react';
 import { resolveFinalClassNames } from '../util/selectors';
 
 export type TrkLinkProps = {
     children: ReactNode;
-    href: string;
+    href?: string;
+    routerHref?: string;
     classNames?: Partial<TrkLinkClassNames>;
 };
 
@@ -16,10 +17,10 @@ export type TrkLinkModClassNames = {
     [Key in keyof Partial<TrkLinkClassNames>]: Record<string, boolean>;
 };
 
-export const TrkLink: FC<TrkLinkProps> = ({ children, href, classNames }) => {
+export const TrkLink: FC<TrkLinkProps> = ({ children, href, routerHref, classNames }) => {
     const baseClassNames = useMemo<TrkLinkClassNames>(
         () => ({
-            link: 'text-primary-700'
+            link: 'text-primary-500'
         }),
         []
     );
@@ -36,9 +37,19 @@ export const TrkLink: FC<TrkLinkProps> = ({ children, href, classNames }) => {
         [baseClassNames, modClassNames, classNames]
     );
 
-    return (
-        <Link className={finalClassNames.link} href={href}>
+    useEffect(() => {
+        if (!href && !routerHref) {
+            throw new Error('Either `href` or `routerHref` must be provided');
+        }
+    }, [href, routerHref]);
+
+    return !href && !routerHref ? null : routerHref ? (
+        <Link className={finalClassNames.link} href={routerHref}>
             {children}
         </Link>
+    ) : (
+        <a href={href} className={finalClassNames.link}>
+            {children}
+        </a>
     );
 };

@@ -5,6 +5,7 @@ import { SupabaseClient } from '@supabase/supabase-js';
 import type { AuthSession } from '@supabase/supabase-js';
 import { supabaseClient } from './supabase-client';
 import { useRouter } from 'next/navigation';
+import { AppRoutes } from '@/app/routes';
 
 export type SuperbaseProviderProps = {
     children: React.ReactNode;
@@ -46,7 +47,7 @@ export const SupabaseProvider: FC<SuperbaseProviderProps> = ({ children }) => {
             } else {
                 setSession(null);
 
-                router.push('/auth/login');
+                router.push(AppRoutes.Login());
             }
         };
 
@@ -56,7 +57,7 @@ export const SupabaseProvider: FC<SuperbaseProviderProps> = ({ children }) => {
             } else {
                 setSession(null);
 
-                router.push('/auth/login');
+                router.push(AppRoutes.Login());
             }
 
             setSession(s ?? null);

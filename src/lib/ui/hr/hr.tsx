@@ -24,7 +24,7 @@ export type TrkHrModClassNames = {
 export const TrkHr: FC<TrkHrProps> = ({ classNames, spacing }): JSX.Element => {
     const baseClassNames = useMemo<TrkHrClassNames>(
         () => ({
-            hr: 'border-t border-stone-300 my-2'
+            hr: 'border-t border-gray-300 my-2'
         }),
         []
     );

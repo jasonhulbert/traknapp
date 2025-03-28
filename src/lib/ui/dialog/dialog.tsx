@@ -71,13 +71,13 @@ export const TrkDialog: FC<TrkDialogProps> = ({
         () => ({
             dialog: 'z-[999] fixed inset-0 flex w-screen h-screen items-center justify-center',
             backdrop: 'fixed inset-0 bg-black/40',
-            window: 'flex flex-col content-baseline relative mx-auto overflow-hidden rounded-lg',
-            header: 'shrink justify-self-start flex flex-nowrap gap-x-2 items-center justify-between h-16 p-4 bg-stone-100',
+            window: 'flex flex-col content-baseline relative mx-auto rounded-lg overflow-hidden shadow-xl',
+            header: 'shrink justify-self-start flex flex-nowrap gap-x-2 items-center justify-between h-16 p-4 bg-gray-100',
             headerTitle: '',
             headerUtils: 'flex flex-nowrap items-center gap-x-2',
             headerCloseBtn: '',
-            body: 'flex-1 p-6 overflow-y-auto bg-white',
-            footer: 'shrink justify-self-end min-h-fit p-4 bg-stone-100'
+            body: 'flex-1 p-4 overflow-y-auto bg-white',
+            footer: 'shrink justify-self-end min-h-fit p-4 bg-gray-100'
         }),
         []
     );
@@ -85,8 +85,8 @@ export const TrkDialog: FC<TrkDialogProps> = ({
     const modClassNames = useMemo<TrkDialogModClassNames>(
         () => ({
             window: {
-                'border border-stone-300 shadow-md': variant === TrkDialogVariants.Default,
-                'w-[calc(100%-(--spacing(8)))] h-auto max-w-[calc(var(--breakpoint-sm)-(--spacing(8)))] max-h-[calc(100vh-(--spacing(8)))]':
+                'border border-gray-300 shadow-md': variant === TrkDialogVariants.Default,
+                'w-[calc(100%-(--spacing(10)))] max-w-[calc(var(--breakpoint-sm)-(--spacing(10)))] max-h-[calc(100vh-(--spacing(30)))]':
                     size === TrkDialogSize.Default,
                 'w-full h-full': size === TrkDialogSize.Full
             }

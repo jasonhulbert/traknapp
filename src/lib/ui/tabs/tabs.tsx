@@ -50,7 +50,7 @@ export const TrkTabs: React.FC<TrkTabsProps> = ({
     const modClassNames = useMemo<Partial<TrkTabsModClassNames>>(
         () => ({
             tabsButtons: {
-                'bg-stone-100 rounded-lg border border-stone-300': theme === TrkTabsThemes.DEFAULT
+                'bg-gray-100 rounded-lg border border-gray-300': theme === TrkTabsThemes.DEFAULT
             },
             tabsContent: {}
         }),

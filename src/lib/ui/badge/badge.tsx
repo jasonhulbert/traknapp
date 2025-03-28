@@ -44,9 +44,9 @@ export const TrkBadge: FC<TrkBadgeProps> = ({
     const modClassNames = useMemo<Partial<TrkBadgeModClassNames>>(
         () => ({
             badge: {
-                'bg-stone-200/50 text-stone-700 border-transparent':
+                'bg-gray-200/50 text-gray-700 border-transparent':
                     theme === TrkBadgeThemes.DEFAULT && variant === TrkBadgeVariants.DEFAULT,
-                'bg-transparent text-stone-700 border-stone-500':
+                'bg-transparent text-gray-700 border-gray-500':
                     theme === TrkBadgeThemes.DEFAULT && variant === TrkBadgeVariants.Outline
             }
         }),

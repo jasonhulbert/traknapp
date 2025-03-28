@@ -53,7 +53,7 @@ export const TrkSelect: FC<TrkSelectProps> = ({
 }): JSX.Element => {
     const baseClassNames: TrkSelectClassNames = {
         wrapper: 'relative w-full',
-        select: 'appearance-none outline-hidden w-full h-14 px-2 pr-10 text-base leading-tight font-normal rounded border transition-all duration-200 focus:ring-2 focus:ring-primary-500/50',
+        select: 'appearance-none outline-hidden w-full h-14 px-3 pr-10 text-base leading-tight font-medium rounded border transition-all duration-200',
         selectArrow:
             'pointer-events-none absolute top-0 right-0 flex items-center justify-center w-10 h-full text-current *:w-4 *:h-4'
     };
@@ -61,9 +61,9 @@ export const TrkSelect: FC<TrkSelectProps> = ({
     const modClassNames = useMemo<Partial<TrkSelectModClassNames>>(
         () => ({
             select: {
-                'bg-stone-50 border-stone-400 text-stone-700 placeholder:text-stone-300 focus:border-stone-700':
+                'bg-white/60 border-gray-300 text-gray-700 placeholder:text-gray-300 focus:bg-white/80 focus:border-primary-500 focus-visible:ring-4 focus-visible:ring-primary-500/20':
                     variant === TrkSelectVariants.DEFAULT && theme === TrkSelectThemes.DEFAULT,
-                'bg-stone-300/20 text-stone-500 cursor-not-allowed': !!disabled,
+                'bg-gray-300/20 text-gray-500 cursor-not-allowed': !!disabled,
                 'pt-4': labelPosition === TrkFieldLabelPositions.Inside
             }
         }),

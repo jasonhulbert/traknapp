@@ -21,14 +21,14 @@ export const PlanBlocksItemExercise: FC<{ block: PlanExerciseBlock }> = ({ block
                         {block.setType === PlanExerciseBlockSetType.Reps ? (
                             set.reps
                         ) : (
-                            <span className="text-stone-300">-</span>
+                            <span className="text-gray-300">-</span>
                         )}
                     </TrkTitle>
                     <TrkTitle size="3xl" weight={800}>
                         {block.setType === PlanExerciseBlockSetType.Time ? (
                             set.time
                         ) : (
-                            <span className="text-stone-300">-</span>
+                            <span className="text-gray-300">-</span>
                         )}
                     </TrkTitle>
                     <TrkTitle size="3xl" weight={800}>

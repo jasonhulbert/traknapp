@@ -2,13 +2,12 @@ import { FC, Fragment, JSX, useMemo } from 'react';
 import { resolveFinalClassNames } from '../util/selectors';
 import { ChevronRight } from 'lucide-react';
 
-export type TrkNavBarMetaProps = {
-    slots: Partial<TrkNavBarMetaClassNamesSlots>;
-    classNames?: Partial<TrkNavBarMetaClassNames>;
-    breadcrumbs?: JSX.Element[] | null;
+export type TrkMetaBarProps = {
+    slots: Partial<TrkMetaBarClassNamesSlots>;
+    classNames?: Partial<TrkMetaBarClassNames>;
 };
 
-export type TrkNavBarMetaClassNames = {
+export type TrkMetaBarClassNames = {
     meta: string;
     metaTitle: string;
     metaTitleText: string;
@@ -16,28 +15,29 @@ export type TrkNavBarMetaClassNames = {
     metaActions: string;
 };
 
-export type TrkNavBarMetaModClassNames = {
-    [key in keyof TrkNavBarMetaClassNames]: Record<string, boolean>;
+export type TrkMetaBarModClassNames = {
+    [key in keyof TrkMetaBarClassNames]: Record<string, boolean>;
 };
 
-export type TrkNavBarMetaClassNamesSlots = {
+export type TrkMetaBarClassNamesSlots = {
     title: JSX.Element;
     actions: JSX.Element;
+    breadcrumbs: JSX.Element[];
 };
 
-export const TrkNavBarMeta: FC<TrkNavBarMetaProps> = ({ slots, classNames, breadcrumbs }): JSX.Element => {
-    const baseClassNames = useMemo<TrkNavBarMetaClassNames>(
+export const TrkMetaBar: FC<TrkMetaBarProps> = ({ slots, classNames }): JSX.Element => {
+    const baseClassNames = useMemo<TrkMetaBarClassNames>(
         () => ({
-            meta: 'flex flex-nowrap items-center gap-x-3 px-4 w-full h-14 border-b border-stone-300/40',
+            meta: 'z-40 flex flex-nowrap items-center gap-x-3 w-full h-16 mb-4',
             metaTitle: 'flex-1 w-auto mr-auto truncate',
             metaTitleText: 'leading-none text-base font-medium',
-            metaTitleBreadcrumbs: 'flex items-center gap-x-1 text-xs font-medium text-stone-500 leading-none',
+            metaTitleBreadcrumbs: 'flex items-center gap-x-1 text-sm font-bold text-gray-500 leading-none',
             metaActions: 'flex flex-none flex-nowrap items-center gap-x-3'
         }),
         []
     );
 
-    const modClassNames = useMemo<Partial<TrkNavBarMetaModClassNames>>(
+    const modClassNames = useMemo<Partial<TrkMetaBarModClassNames>>(
         () => ({
             meta: {
                 'justify-between': !!slots.actions
@@ -46,22 +46,22 @@ export const TrkNavBarMeta: FC<TrkNavBarMetaProps> = ({ slots, classNames, bread
         [slots]
     );
 
-    const finalClassNames = useMemo<TrkNavBarMetaClassNames>(
+    const finalClassNames = useMemo<TrkMetaBarClassNames>(
         () =>
-            resolveFinalClassNames<TrkNavBarMetaClassNames>(
+            resolveFinalClassNames<TrkMetaBarClassNames>(
                 baseClassNames,
                 modClassNames,
                 classNames
-            ) as TrkNavBarMetaClassNames,
+            ) as TrkMetaBarClassNames,
         [baseClassNames, modClassNames, classNames]
     );
 
     return (
         <div className={finalClassNames.meta}>
             <div className={finalClassNames.metaTitle}>
-                {breadcrumbs && (
+                {slots.breadcrumbs && (
                     <nav className={finalClassNames.metaTitleBreadcrumbs}>
-                        {breadcrumbs?.map((breadcrumb, i) => (
+                        {slots.breadcrumbs?.map((breadcrumb, i) => (
                             <Fragment key={i}>
                                 {breadcrumb}
                                 <ChevronRight size={12} />

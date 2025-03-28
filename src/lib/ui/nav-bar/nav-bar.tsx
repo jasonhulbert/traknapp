@@ -1,10 +1,7 @@
 'use client';
 
-import { FC, JSX, useMemo } from 'react';
-import { useNavBar } from './nav-bar-provider';
-import { TrkNavBarMeta } from './nav-bar-meta';
+import { FC, JSX, useCallback, useEffect, useMemo, useRef } from 'react';
 import { resolveFinalClassNames } from '../util/selectors';
-import { TrkTitle } from '../title/title';
 import { TrkNavBarGlobal } from './nav-bar-global';
 
 export type TrkNavBarProps = {
@@ -29,11 +26,11 @@ export type TrkNavBarSlots = {
 };
 
 export const TrkNavBar: FC<TrkNavBarProps> = ({ classNames, slots }) => {
-    const { title, breadcrumbs, actions } = useNavBar();
+    const navBarRef = useRef<HTMLDivElement>(null);
 
     const baseClassNames = useMemo<TrkNavBarClassNames>(
         () => ({
-            navBar: 'z-40 sticky inset-0 bottom-auto flex flex-wrap w-full h-auto bg-stone-200/40 backdrop-blur-md'
+            navBar: 'z-40 sticky inset-0 bottom-auto flex flex-wrap w-full min-h-16 bg-gray-100/60 border-b border-gray-300/60 backdrop-blur-md'
         }),
         []
     );
@@ -55,26 +52,32 @@ export const TrkNavBar: FC<TrkNavBarProps> = ({ classNames, slots }) => {
         [baseClassNames, modClassNames, classNames]
     );
 
-    return (
-        <div className={finalClassNames.navBar}>
-            <TrkNavBarGlobal slots={{ start: slots?.start, middle: slots?.middle, end: slots?.end }} />
+    const handleResize = useCallback(() => {
+        if (navBarRef.current) {
+            document.body.style.setProperty('--trk-nav-bar-height', `${navBarRef.current.clientHeight}px`);
+        }
+    }, [navBarRef]);
 
-            {(title || breadcrumbs || actions) && (
-                <TrkNavBarMeta
-                    breadcrumbs={breadcrumbs}
-                    slots={{
-                        title:
-                            typeof title === 'string' ? (
-                                <TrkTitle tag="h1" weight={600} truncate={true}>
-                                    {title}
-                                </TrkTitle>
-                            ) : (
-                                title
-                            ),
-                        actions
-                    }}
-                />
-            )}
+    useEffect(() => {
+        const observer = new ResizeObserver(handleResize);
+        const ref = navBarRef.current;
+
+        if (ref) {
+            observer.observe(ref);
+        }
+
+        return () => {
+            if (ref) {
+                observer.unobserve(ref);
+            }
+
+            observer.disconnect();
+        };
+    }, [navBarRef, handleResize]);
+
+    return (
+        <div ref={navBarRef} className={finalClassNames.navBar}>
+            <TrkNavBarGlobal slots={{ start: slots?.start, middle: slots?.middle, end: slots?.end }} />
         </div>
     );
 };

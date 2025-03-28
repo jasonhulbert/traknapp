@@ -1,16 +1,17 @@
 'use client';
 
-import { FC, JSX, useCallback, useEffect, useRef, useState } from 'react';
+import { FC, JSX, useCallback, useRef, useState } from 'react';
 import { TrkButton } from '@/lib/ui/button/button';
 import { useTrkDialog } from '@/lib/ui/dialog';
 import { Plan, PlanBlock } from '@/types/plan';
 import { useAppStore } from '@/store/app-store';
 import { PlanBlocks } from '../plan-blocks/plan-blocks';
-import { useNavBar } from '@/lib/ui/nav-bar/nav-bar-provider';
 import { TrkLink } from '@/lib/ui/link/link';
 import { TrkView } from '@/lib/ui/view/view';
 import { Plus } from 'lucide-react';
 import { PlanBlockFormDialog } from '../plan-block-form-dialog/plan-block-form-dialog';
+import { TrkMetaBar } from '@/lib/ui/meta-bar/meta-bar';
+import { TrkTitle } from '@/lib/ui/title/title';
 
 export type PlanDetailViewProps = {
     plan: Plan;
@@ -20,7 +21,6 @@ export const PlanDetailView: FC<PlanDetailViewProps> = ({ plan }): JSX.Element =
     const { updatePlan } = useAppStore((state) => state);
     const { dialogState, setDialogState } = useTrkDialog();
     const [editingBlock, setEditingBlock] = useState<Partial<PlanBlock> | null>(null);
-    const { setTitle, setBreadcrumbs, setActions, resetNavbar } = useNavBar();
     const blockFormDialogId = useRef(`block-form-dialog-${plan.id}`);
 
     const openBlockFormDialog = useCallback(
@@ -69,36 +69,34 @@ export const PlanDetailView: FC<PlanDetailViewProps> = ({ plan }): JSX.Element =
         [plan, updatePlan, closeBlockFormDialog]
     );
 
-    useEffect(() => {
-        setTitle(plan.name);
-
-        setBreadcrumbs(
-            [
-                { label: 'Home', href: '/' },
-                { label: 'Plans', href: '/plans' }
-            ].map((b, i) => (
-                <TrkLink key={i} href={b.href}>
-                    {b.label}
-                </TrkLink>
-            ))
-        );
-
-        setActions(
-            <>
-                <TrkButton size="sm" theme="primary" onClick={() => openBlockFormDialog()}>
-                    <Plus size={16} />
-                    Add Block
-                </TrkButton>
-            </>
-        );
-
-        return () => {
-            resetNavbar();
-        };
-    }, [plan, setTitle, setBreadcrumbs, setActions, resetNavbar, openBlockFormDialog]);
-
     return (
         <TrkView variant="inset">
+            <TrkMetaBar
+                slots={{
+                    title: (
+                        <TrkTitle weight={700} size="lg" tag="h2" truncate={true}>
+                            {plan.name}
+                        </TrkTitle>
+                    ),
+                    breadcrumbs: [
+                        { label: 'Home', href: '/' },
+                        { label: 'Plans', href: '/plans' }
+                    ].map((b, i) => (
+                        <TrkLink key={i} href={b.href}>
+                            {b.label}
+                        </TrkLink>
+                    )),
+                    actions: (
+                        <>
+                            <TrkButton size="sm" theme="primary" onClick={() => openBlockFormDialog()}>
+                                <Plus size={16} />
+                                <span>Add Block</span>
+                            </TrkButton>
+                        </>
+                    )
+                }}
+            />
+
             <PlanBlocks blocks={plan?.blocks} onEdit={(block: PlanBlock) => openBlockFormDialog(block)}></PlanBlocks>
 
             {editingBlock && (

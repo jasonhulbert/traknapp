@@ -23,7 +23,7 @@ export const TrkViewVariant = {
 
 export const TrkView: FC<TrkViewProps> = ({ children, classNames, variant }) => {
     const baseClassNames: TrkViewClassNames = {
-        view: 'block z-30'
+        view: 'block'
     };
 
     const modClassNames = useMemo<TrkViewModClassNames>(

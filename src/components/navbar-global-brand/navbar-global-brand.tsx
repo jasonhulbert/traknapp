@@ -10,6 +10,7 @@ export const NavbarGlobalBrand: FC = (): JSX.Element => {
                 width={112}
                 height={26}
                 className="w-full h-full"
+                priority
             />
         </div>
     );

@@ -32,7 +32,7 @@ export const PlanBlocksItem: FC<PlanBlocksItemProps> = ({ block, onEdit }): JSX.
                             iconOnly={true}
                             onClick={() => onEdit?.(block)}
                         >
-                            <Edit3 size={32} />
+                            <Edit3 size={24} />
                         </TrkButton>
                     </div>
                 ),
