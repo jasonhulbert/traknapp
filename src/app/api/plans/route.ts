@@ -30,6 +30,11 @@ const mockPlans = [
                         reps: 10,
                         time: 0,
                         rest: 30
+                    },
+                    {
+                        reps: 10,
+                        time: 0,
+                        rest: 30
                     }
                 ]
             },

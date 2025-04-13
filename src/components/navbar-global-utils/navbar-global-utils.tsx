@@ -6,11 +6,11 @@ import { Unlock, User } from 'lucide-react';
 import { FC, JSX } from 'react';
 
 export const NavbarGlobalUtils: FC = (): JSX.Element => {
-    const { client, session } = useSupabase();
+    const { session, signOut } = useSupabase();
 
     return (
         <div className="flex flex-nowrap items-center gap-x-2">
-            {client && session && (
+            {session && (
                 <>
                     <TrkButton size="sm" theme="default" variant="ghost" radiusSize="full" iconOnly={true}>
                         <User size={20} />
@@ -21,7 +21,7 @@ export const NavbarGlobalUtils: FC = (): JSX.Element => {
                         variant="ghost"
                         radiusSize="full"
                         iconOnly={true}
-                        onClick={() => client?.auth.signOut()}
+                        onClick={() => signOut()}
                     >
                         <Unlock size={20} />
                     </TrkButton>

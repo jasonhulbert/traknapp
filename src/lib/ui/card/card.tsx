@@ -39,9 +39,9 @@ export const TrkCard: FC<TrkCardProps> = ({ children, classNames, variant, slots
     const baseClassNames = useMemo<TrkCardClassNames>(
         () => ({
             card: 'flex flex-col p-2 rounded-lg overflow-hidden',
-            header: 'flex items-center justify-between flex-nowrap gap-x-2 w-full p-2 border-b border-gray-200',
-            body: 'relative w-full p-2',
-            footer: 'flex items-center justify-between flex-nowrap gap-x-2 w-full p-2'
+            header: 'flex items-center shrink justify-between flex-nowrap gap-x-2 w-full p-2 border-b border-gray-200',
+            body: 'relative flex-1 w-full p-2',
+            footer: 'flex items-center shrink justify-between flex-nowrap gap-x-2 w-full p-2'
         }),
         []
     );
