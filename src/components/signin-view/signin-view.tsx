@@ -1,7 +1,7 @@
 'use client';
 
 import { FC, useCallback, useEffect, useState, FormEvent } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { Info, ShieldQuestion } from 'lucide-react';
 import { useSupabase } from '@/providers/supabase/supabase-provider';
 import { AppRoutes } from '@/app/routes';
@@ -9,7 +9,7 @@ import { TrkField } from '@/lib/ui/field/field';
 import { TrkInput } from '@/lib/ui/input/input';
 import { TrkButton } from '@/lib/ui/button/button';
 import { TrkCard } from '@/lib/ui/card/card';
-import { TrkView } from '@/lib/ui/view/view';
+import { TrkLayoutView } from '@/lib/ui/layout/layout-view/layout-view';
 import { TrkLink } from '@/lib/ui/link/link';
 import { TrkTitle } from '@/lib/ui/title/title';
 
@@ -21,13 +21,31 @@ export type SigninFormData = {
 export const SigninView: FC = () => {
     const { client, session, setSession } = useSupabase();
     const router = useRouter();
+    const searchParams = useSearchParams();
+    const [signinFormData, setSigninFormData] = useState<SigninFormData>({
+        email: '',
+        password: ''
+    });
+    const [isLoading, setIsLoading] = useState(false);
 
-    const redirectHome = useCallback(() => {
-        router.push(AppRoutes.Home());
-    }, [router]);
+    const redirect = useCallback(() => {
+        const redirectPath = searchParams.get('redirect');
+
+        const isRouteValid = Object.values(AppRoutes).some((route) => {
+            return redirectPath?.startsWith(route());
+        });
+
+        if (redirectPath && isRouteValid) {
+            router.push(redirectPath ?? AppRoutes.Home());
+        } else {
+            router.push(AppRoutes.Home());
+        }
+    }, [router, searchParams]);
 
     const signin = useCallback(
         async (evt: FormEvent, formData: SigninFormData) => {
+            setIsLoading(true);
+
             evt.preventDefault();
 
             try {
@@ -42,23 +60,20 @@ export const SigninView: FC = () => {
             } catch (e) {
                 throw e;
             }
+
+            setIsLoading(false);
         },
         [client, setSession]
     );
 
-    const [signinFormData, setSigninFormData] = useState<SigninFormData>({
-        email: '',
-        password: ''
-    });
-
     useEffect(() => {
         if (session) {
-            redirectHome();
+            redirect();
         }
-    }, [session, redirectHome]);
+    }, [session, redirect]);
 
     return (
-        <TrkView variant="inset">
+        <TrkLayoutView variant="inset" isLoading={isLoading}>
             <form className="block mt-4" onSubmit={(evt: FormEvent) => signin(evt, signinFormData)}>
                 <TrkCard
                     classNames={{ card: '!w-full !max-w-[calc(var(--spacing)*120)] !mx-auto' }}
@@ -125,6 +140,6 @@ export const SigninView: FC = () => {
                     </div>
                 </TrkCard>
             </form>
-        </TrkView>
+        </TrkLayoutView>
     );
 };

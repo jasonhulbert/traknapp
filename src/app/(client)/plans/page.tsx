@@ -1,3 +1,5 @@
+'use server';
+
 import { FC } from 'react';
 import { PlanListView } from '@/components/plan-list-view/plan-list-view';
 

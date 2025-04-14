@@ -1,3 +1,5 @@
+'use server';
+
 import { FC } from 'react';
 import { PlanDetailView } from '@/components/plan-detail-view/plan-detail-view';
 

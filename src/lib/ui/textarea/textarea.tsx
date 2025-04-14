@@ -58,9 +58,9 @@ export const TrkTextarea: React.FC<TrkTextareaProps> = ({
     const modClassNames = useMemo<Partial<TrkTextareaModClassNames>>(
         () => ({
             textarea: {
-                'bg-gray-50 border-gray-400 text-gray-700 placeholder:text-gray-300 focus:border-gray-700':
+                'bg-white/60 border-gray-300 text-gray-700 placeholder:text-gray-300 focus:bg-white/80 focus:border-primary-500 focus-visible:ring-4 focus-visible:ring-primary-500/20':
                     variant === TrkTextareaVariants.DEFAULT && theme === TrkTextareThemes.DEFAULT && !disabled,
-                'bg-gray-200 text-gray-500 cursor-not-allowed': disabled,
+                'bg-gray-200/60 text-gray-500 cursor-not-allowed': disabled,
                 'pt-4': labelPosition === TrkFieldLabelPositions.Inside
             }
         }),

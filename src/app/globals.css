@@ -15,7 +15,7 @@
   --font-sans: var(--font-inter-sans);
   --font-sans-tight: var(--font-inter-tight-sans);
 
-  --color-primary: oklch(62.74% 0.1057 200.53);
+  --color-primary: oklch(0.51 0.2538 291.78);
   --color-primary-50: color-mix(in oklch, var(--color-primary), white 60%);
   --color-primary-100: color-mix(in oklch, var(--color-primary), white 50%);
   --color-primary-200: color-mix(in oklch, var(--color-primary), white 40%);
@@ -29,6 +29,7 @@
   --color-primary-950: color-mix(in oklch, var(--color-primary), black 60%);
 
   --color-foreground: var(--color-gray-700);
+  --color-background: var(--color-gray-200);
 }
 
 /*
@@ -50,5 +51,5 @@
 }
 
 body, html {
-    @apply h-full text-foreground bg-gray-200 font-sans;
+    @apply h-full text-foreground bg-background font-sans;
 }

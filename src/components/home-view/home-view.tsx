@@ -1,12 +1,12 @@
 'use client';
 
 import { TrkLink } from '@/lib/ui/link/link';
-import { TrkView } from '@/lib/ui/view/view';
+import { TrkLayoutView } from '@/lib/ui/layout/layout-view/layout-view';
 import { FC } from 'react';
 
 export const HomeView: FC = () => {
     return (
-        <TrkView variant="inset">
+        <TrkLayoutView variant="inset">
             <div className="flex flex-col gap-y-4 p-4">
                 <ul>
                     <li>
@@ -17,6 +17,6 @@ export const HomeView: FC = () => {
                     </li>
                 </ul>
             </div>
-        </TrkView>
+        </TrkLayoutView>
     );
 };

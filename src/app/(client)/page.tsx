@@ -1,5 +1,8 @@
+import { FC } from 'react';
 import { HomeView } from '@/components/home-view/home-view';
 
-export default function Home() {
+const Page: FC = async () => {
     return <HomeView />;
-}
+};
+
+export default Page;

@@ -1,8 +1,9 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { Info, ShieldQuestion } from 'lucide-react';
 import { FC, FormEvent, useCallback, useEffect, useState } from 'react';
+import { useSupabase } from '@/providers/supabase/supabase-provider';
 import { AppRoutes } from '@/app/routes';
 import { TrkButton } from '@/lib/ui/button/button';
 import { TrkCard } from '@/lib/ui/card/card';
@@ -10,8 +11,7 @@ import { TrkField } from '@/lib/ui/field/field';
 import { TrkInput } from '@/lib/ui/input/input';
 import { TrkLink } from '@/lib/ui/link/link';
 import { TrkTitle } from '@/lib/ui/title/title';
-import { TrkView } from '@/lib/ui/view/view';
-import { useSupabase } from '@/providers/supabase/supabase-provider';
+import { TrkLayoutView } from '@/lib/ui/layout/layout-view/layout-view';
 
 export type SignupFormData = {
     email: string;
@@ -24,6 +24,7 @@ export type SignupFormData = {
 export const SignupView: FC = () => {
     const { client, session, setSession } = useSupabase();
     const router = useRouter();
+    const searchParams = useSearchParams();
 
     const [signupFormData, setSignupFormData] = useState<SignupFormData>({
         email: '',
@@ -33,9 +34,19 @@ export const SignupView: FC = () => {
         dob: ''
     });
 
-    const redirectHome = useCallback(() => {
-        router.push(AppRoutes.Home());
-    }, [router]);
+    const redirect = useCallback(() => {
+        const redirectPath = searchParams.get('redirect');
+
+        const isRouteValid = Object.values(AppRoutes).some((route) => {
+            return redirectPath?.startsWith(route());
+        });
+
+        if (redirectPath && isRouteValid) {
+            router.push(redirectPath ?? AppRoutes.Home());
+        } else {
+            router.push(AppRoutes.Home());
+        }
+    }, [router, searchParams]);
 
     const signup = useCallback(
         async (evt: FormEvent, formData: SignupFormData) => {
@@ -66,12 +77,12 @@ export const SignupView: FC = () => {
 
     useEffect(() => {
         if (session) {
-            redirectHome();
+            redirect();
         }
-    }, [session, redirectHome]);
+    }, [session, redirect]);
 
     return (
-        <TrkView variant="inset">
+        <TrkLayoutView variant="inset">
             <form className="block mt-4" onSubmit={(evt: FormEvent) => signup(evt, signupFormData)}>
                 <TrkCard
                     classNames={{ card: '!w-full !max-w-[calc(var(--spacing)*120)] !mx-auto' }}
@@ -183,6 +194,6 @@ export const SignupView: FC = () => {
                     </div>
                 </TrkCard>
             </form>
-        </TrkView>
+        </TrkLayoutView>
     );
 };

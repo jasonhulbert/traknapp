@@ -1,6 +1,6 @@
 import { FC, JSX, useCallback, useEffect, useState } from 'react';
 import { TrkButton } from '@/lib/ui/button/button';
-import { TrkDialog } from '@/lib/ui/dialog';
+import { TrkDialog } from '@/lib/ui/dialog/dialog';
 import { PlanBlock } from '@/types/plan';
 import { PlanBlockType } from '@/models/plan';
 import { PlanBlockExerciseForm } from '../plan-block-exercise-form/plan-block-exercise-form';

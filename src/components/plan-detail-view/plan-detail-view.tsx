@@ -2,12 +2,12 @@
 
 import { FC, JSX, useCallback, useRef, useState } from 'react';
 import { TrkButton } from '@/lib/ui/button/button';
-import { useTrkDialog } from '@/lib/ui/dialog';
+import { useTrkDialog } from '@/lib/ui/dialog/dialog-provider';
 import { Plan, PlanBlock } from '@/types/plan';
 import { useAppStore } from '@/store/app-store';
 import { PlanBlocks } from '../plan-blocks/plan-blocks';
 import { TrkLink } from '@/lib/ui/link/link';
-import { TrkView } from '@/lib/ui/view/view';
+import { TrkLayoutView } from '@/lib/ui/layout/layout-view/layout-view';
 import { Plus } from 'lucide-react';
 import { PlanBlockFormDialog } from '../plan-block-form-dialog/plan-block-form-dialog';
 import { TrkMetaBar } from '@/lib/ui/meta-bar/meta-bar';
@@ -70,7 +70,7 @@ export const PlanDetailView: FC<PlanDetailViewProps> = ({ plan }): JSX.Element =
     );
 
     return (
-        <TrkView variant="inset">
+        <TrkLayoutView variant="inset">
             <TrkMetaBar
                 slots={{
                     title: (
@@ -107,6 +107,6 @@ export const PlanDetailView: FC<PlanDetailViewProps> = ({ plan }): JSX.Element =
                     onCancel={() => closeBlockFormDialog()}
                 ></PlanBlockFormDialog>
             )}
-        </TrkView>
+        </TrkLayoutView>
     );
 };

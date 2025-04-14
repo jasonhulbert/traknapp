@@ -1,30 +1,30 @@
 import { FC, JSX, useMemo } from 'react';
-import { resolveFinalClassNames } from '../util/selectors';
+import { resolveFinalClassNames } from '../../util/selectors';
 
-export type TrkNavBarGlobalProps = {
-    classNames?: Partial<TrkNavBarGlobalClassNames>;
-    slots?: Partial<TrkNavBarGlobalSlots>;
+export type TrkNavbarGlobalProps = {
+    classNames?: Partial<TrkNavbarGlobalClassNames>;
+    slots?: Partial<TrkNavbarGlobalSlots>;
 };
 
-export type TrkNavBarGlobalClassNames = {
+export type TrkNavbarGlobalClassNames = {
     global: string;
     globalStart: string;
     globalMiddle: string;
     globalEnd: string;
 };
 
-export type TrkNavBarGlobalModClassNames = {
-    [key in keyof TrkNavBarGlobalClassNames]?: Record<string, boolean>;
+export type TrkNavbarGlobalModClassNames = {
+    [key in keyof TrkNavbarGlobalClassNames]?: Record<string, boolean>;
 };
 
-export type TrkNavBarGlobalSlots = {
+export type TrkNavbarGlobalSlots = {
     start: JSX.Element;
     middle: JSX.Element;
     end: JSX.Element;
 };
 
-export const TrkNavBarGlobal: FC<TrkNavBarGlobalProps> = ({ classNames, slots }) => {
-    const baseClassNames = useMemo<TrkNavBarGlobalClassNames>(
+export const TrkNavbarGlobal: FC<TrkNavbarGlobalProps> = ({ classNames, slots }) => {
+    const baseClassNames = useMemo<TrkNavbarGlobalClassNames>(
         () => ({
             global: 'grid grid-cols-[1fr_auto_1fr] items-center w-full h-auto py-2 px-4 gap-2',
             globalStart: 'flex justify-start items-center w-auto',
@@ -34,15 +34,10 @@ export const TrkNavBarGlobal: FC<TrkNavBarGlobalProps> = ({ classNames, slots })
         []
     );
 
-    const modClassNames = useMemo<Partial<TrkNavBarGlobalModClassNames>>(() => ({}), []);
+    const modClassNames = useMemo<Partial<TrkNavbarGlobalModClassNames>>(() => ({}), []);
 
-    const finalClassNames = useMemo<TrkNavBarGlobalClassNames>(
-        () =>
-            resolveFinalClassNames<TrkNavBarGlobalClassNames>(
-                baseClassNames,
-                modClassNames,
-                classNames
-            ) as TrkNavBarGlobalClassNames,
+    const finalClassNames = useMemo<TrkNavbarGlobalClassNames>(
+        () => resolveFinalClassNames<TrkNavbarGlobalClassNames>(baseClassNames, modClassNames, classNames),
         [baseClassNames, modClassNames, classNames]
     );
 

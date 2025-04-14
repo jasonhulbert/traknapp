@@ -12,17 +12,10 @@ export const NavbarGlobalUtils: FC = (): JSX.Element => {
         <div className="flex flex-nowrap items-center gap-x-2">
             {session && (
                 <>
-                    <TrkButton size="sm" theme="default" variant="ghost" radiusSize="full" iconOnly={true}>
+                    <TrkButton size="sm" theme="default" variant="ghost" iconOnly={true}>
                         <User size={20} />
                     </TrkButton>
-                    <TrkButton
-                        size="sm"
-                        theme="danger"
-                        variant="ghost"
-                        radiusSize="full"
-                        iconOnly={true}
-                        onClick={() => signOut()}
-                    >
+                    <TrkButton size="sm" theme="danger" variant="ghost" iconOnly={true} onClick={() => signOut()}>
                         <Unlock size={20} />
                     </TrkButton>
                 </>

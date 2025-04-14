@@ -41,15 +41,18 @@ export const SupabaseProvider: FC<SuperbaseProviderProps> = ({ children }) => {
     const [session, setSession] = useState<AuthSession | null>(null);
     const router = useRouter();
 
-    const signOut = useCallback(async () => {
-        if (client) {
-            await client.auth.signOut();
+    const signOut = useCallback(
+        async (redirect = AppRoutes.Signin()) => {
+            if (client) {
+                await client.auth.signOut();
 
-            setSession(null);
+                setSession(null);
 
-            router.push(AppRoutes.Signin());
-        }
-    }, [client, setSession, router]);
+                router.push(redirect);
+            }
+        },
+        [client, setSession, router]
+    );
 
     useEffect(() => {
         const auth = client?.auth;

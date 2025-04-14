@@ -1,5 +1,5 @@
 import { AppRoutes } from '@/app/routes';
-import { createServerClient } from '@supabase/ssr';
+import { createClient } from '@/util/supabase/server';
 import { NextResponse, type NextRequest } from 'next/server';
 
 const publicRoutes = [AppRoutes.Signin(), AppRoutes.Signup(), AppRoutes.Error(), AppRoutes.Auth(), AppRoutes.Api()];
@@ -15,32 +15,10 @@ export async function updateSession(request: NextRequest) {
         return NextResponse.next();
     }
 
-    let supabaseResponse = NextResponse.next({
+    const supabase = await createClient();
+    const supabaseResponse = NextResponse.next({
         request
     });
-
-    const supabase = createServerClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-        {
-            cookies: {
-                getAll() {
-                    return request.cookies.getAll();
-                },
-                setAll(cookiesToSet) {
-                    cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value));
-
-                    supabaseResponse = NextResponse.next({
-                        request
-                    });
-
-                    cookiesToSet.forEach(({ name, value, options }) =>
-                        supabaseResponse.cookies.set(name, value, options)
-                    );
-                }
-            }
-        }
-    );
 
     const {
         data: { user }
